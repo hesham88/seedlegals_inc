@@ -44,21 +44,21 @@ export const SectionBankAccount: React.FC<SectionBankAccountProps> = ({ company 
         5
       </div>
 
-      <div className="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden">
+      <div className="glass-card overflow-hidden">
         {/* Accordion Header */}
         <button
           onClick={() => setExpanded(!expanded)}
           className="w-full px-5 py-4 bg-slate-50/70 hover:bg-slate-50 flex items-center justify-between text-left transition border-b border-slate-100"
         >
           <div className="flex items-center gap-3">
-            <div className="text-lg md:text-xl font-bold text-slate-900">
+            <div className="text-lg md:text-xl font-bold text-hd">
               5. Create or connect bank account (Investment Ready)
             </div>
             <span className="px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-700 text-xs font-semibold border border-emerald-200 flex items-center gap-1">
               <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" /> Investment Ready
             </span>
           </div>
-          <ChevronDown className={`w-5 h-5 text-slate-400 transition-transform ${expanded ? 'rotate-180' : ''}`} />
+          <ChevronDown className={`w-5 h-5 text-mut transition-transform ${expanded ? 'rotate-180' : ''}`} />
         </button>
 
         {expanded && (
@@ -115,12 +115,12 @@ export const SectionBankAccount: React.FC<SectionBankAccountProps> = ({ company 
                   </div>
                   <div>
                     <div className="flex items-center gap-2">
-                      <h4 className="text-sm font-bold text-slate-900">{bankName}</h4>
+                      <h4 className="text-sm font-bold text-hd">{bankName}</h4>
                       <span className="px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 text-[10px] font-bold border border-emerald-200">
                         Connected & Active
                       </span>
                     </div>
-                    <p className="text-xs text-slate-500 mt-0.5">
+                    <p className="text-xs text-mut mt-0.5">
                       Account: <strong>{maskAccount(accountNumber, privacyMode)}</strong> • Routing: <span className="font-mono">{maskAccount(routingNumber, privacyMode)}</span>
                     </p>
                   </div>
@@ -129,7 +129,7 @@ export const SectionBankAccount: React.FC<SectionBankAccountProps> = ({ company 
                 <div className="flex items-center gap-2 shrink-0">
                   <button
                     onClick={() => setIsConnectingCustom(true)}
-                    className="px-3.5 py-2 rounded-xl bg-white border border-slate-200 text-slate-700 hover:bg-slate-100 text-xs font-semibold transition"
+                    className="px-3.5 py-2 rounded-xl bg-white border border-slate-200 text-body hover:bg-slate-100 text-xs font-semibold transition"
                   >
                     Change Account
                   </button>
@@ -162,41 +162,41 @@ export const SectionBankAccount: React.FC<SectionBankAccountProps> = ({ company 
             {/* Custom Bank Connection Form Modal / Inline */}
             {isConnectingCustom && (
               <form onSubmit={handleConnectBank} className="p-5 bg-white rounded-2xl border border-slate-200 space-y-4">
-                <h4 className="text-xs font-bold text-slate-900 uppercase tracking-wider">
+                <h4 className="text-xs font-bold text-hd uppercase tracking-wider">
                   Connect Corporate Bank Account
                 </h4>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                   <div>
-                    <label className="block text-xs font-semibold text-slate-700 mb-1">Bank Name</label>
+                    <label className="block text-xs font-semibold text-body mb-1">Bank Name</label>
                     <input
                       type="text"
                       required
                       value={bankName}
                       onChange={(e) => setBankName(e.target.value)}
                       placeholder="e.g. Mercury, Chase, Brex"
-                      className="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs font-semibold text-slate-900 outline-none focus:border-blue-600"
+                      className="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs font-semibold text-hd outline-none focus:border-blue-600"
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-semibold text-slate-700 mb-1">Routing Number</label>
+                    <label className="block text-xs font-semibold text-body mb-1">Routing Number</label>
                     <input
                       type="text"
                       required
                       value={routingNumber}
                       onChange={(e) => setRoutingNumber(e.target.value)}
                       placeholder="121142201"
-                      className="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs font-mono text-slate-900 outline-none focus:border-blue-600"
+                      className="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs font-mono text-hd outline-none focus:border-blue-600"
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-semibold text-slate-700 mb-1">Account Number</label>
+                    <label className="block text-xs font-semibold text-body mb-1">Account Number</label>
                     <input
                       type="text"
                       required
                       value={accountNumber}
                       onChange={(e) => setAccountNumber(e.target.value)}
                       placeholder="•••• 8492"
-                      className="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs font-mono text-slate-900 outline-none focus:border-blue-600"
+                      className="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs font-mono text-hd outline-none focus:border-blue-600"
                     />
                   </div>
                 </div>
@@ -205,7 +205,7 @@ export const SectionBankAccount: React.FC<SectionBankAccountProps> = ({ company 
                   <button
                     type="button"
                     onClick={() => setIsConnectingCustom(false)}
-                    className="px-4 py-2 rounded-xl border border-slate-200 text-xs font-semibold text-slate-600 hover:bg-slate-50 transition"
+                    className="px-4 py-2 rounded-xl border border-slate-200 text-xs font-semibold text-body hover:bg-slate-50 transition"
                   >
                     Cancel
                   </button>
@@ -221,7 +221,7 @@ export const SectionBankAccount: React.FC<SectionBankAccountProps> = ({ company 
 
             {/* Partnered Neobanks (One-Click Auto-Fill) */}
             <div>
-              <div className="text-xs font-bold text-slate-700 mb-3 uppercase tracking-wider">
+              <div className="text-xs font-bold text-body mb-3 uppercase tracking-wider">
                 Partnered Startup Banking Portals (One-Click Auto-Fill Data)
               </div>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -229,12 +229,12 @@ export const SectionBankAccount: React.FC<SectionBankAccountProps> = ({ company 
                 <div className="p-4 bg-gradient-to-b from-slate-50 to-blue-50/30 rounded-2xl border border-slate-200 flex flex-col justify-between space-y-3">
                   <div>
                     <div className="flex items-center justify-between mb-2">
-                      <span className="font-extrabold text-sm text-slate-900">Mercury Bank</span>
+                      <span className="font-extrabold text-sm text-hd">Mercury Bank</span>
                       <span className="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-bold">
                         $500 Bonus
                       </span>
                     </div>
-                    <p className="text-xs text-slate-500 leading-relaxed">
+                    <p className="text-xs text-mut leading-relaxed">
                       Silicon Valley banking with FDIC insurance up to $5M. Pre-fills Delaware COI, EIN, and cap table data automatically.
                     </p>
                   </div>
@@ -253,12 +253,12 @@ export const SectionBankAccount: React.FC<SectionBankAccountProps> = ({ company 
                 <div className="p-4 bg-gradient-to-b from-slate-50 to-slate-100/50 rounded-2xl border border-slate-200 flex flex-col justify-between space-y-3">
                   <div>
                     <div className="flex items-center justify-between mb-2">
-                      <span className="font-extrabold text-sm text-slate-900">Brex Business</span>
+                      <span className="font-extrabold text-sm text-hd">Brex Business</span>
                       <span className="px-2 py-0.5 rounded-full bg-blue-100 text-blue-800 text-[10px] font-bold">
                         Corporate Cards
                       </span>
                     </div>
-                    <p className="text-xs text-slate-500 leading-relaxed">
+                    <p className="text-xs text-mut leading-relaxed">
                       All-in-one business account with high-yield cash sweep, corporate credit cards, and automated expense reporting.
                     </p>
                   </div>
@@ -277,12 +277,12 @@ export const SectionBankAccount: React.FC<SectionBankAccountProps> = ({ company 
                 <div className="p-4 bg-gradient-to-b from-slate-50 to-slate-100/50 rounded-2xl border border-slate-200 flex flex-col justify-between space-y-3">
                   <div>
                     <div className="flex items-center justify-between mb-2">
-                      <span className="font-extrabold text-sm text-slate-900">Ramp Banking</span>
+                      <span className="font-extrabold text-sm text-hd">Ramp Banking</span>
                       <span className="px-2 py-0.5 rounded-full bg-slate-200 text-slate-800 text-[10px] font-bold">
                         Finance Automation
                       </span>
                     </div>
-                    <p className="text-xs text-slate-500 leading-relaxed">
+                    <p className="text-xs text-mut leading-relaxed">
                       Finance automation platform with 1.5% cashback corporate cards, bill pay, and treasury management.
                     </p>
                   </div>
@@ -306,8 +306,8 @@ export const SectionBankAccount: React.FC<SectionBankAccountProps> = ({ company 
                   <DollarSign className="w-5 h-5" />
                 </div>
                 <div>
-                  <div className="font-bold text-slate-900">Initial Founder Capital Purchase Payment Logged</div>
-                  <div className="text-slate-500">
+                  <div className="font-bold text-hd">Initial Founder Capital Purchase Payment Logged</div>
+                  <div className="text-mut">
                     Deposit of <strong>$90.00</strong> (9,000,000 Common Shares @ $0.00001) verified in {bankName}. Satisfies Delaware DGCL Section 152 stock payment requirements.
                   </div>
                 </div>

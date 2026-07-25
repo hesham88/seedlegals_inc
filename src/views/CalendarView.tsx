@@ -27,8 +27,8 @@ export const CalendarView: React.FC = () => {
   return (
     <div className="space-y-6 max-w-5xl mx-auto pb-12">
       <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-xs">
-        <h2 className="text-xl font-bold text-slate-900">Compliance & Filing Calendar</h2>
-        <p className="text-xs text-slate-500 mt-1">
+        <h2 className="text-xl font-bold text-hd">Compliance & Filing Calendar</h2>
+        <p className="text-xs text-mut mt-1">
           Statutory deadlines, 83(b) election reminders, and Delaware annual state tax filings
         </p>
       </div>
@@ -60,8 +60,8 @@ export const CalendarView: React.FC = () => {
                 <div className="text-xs font-bold text-blue-600 uppercase tracking-wider mb-0.5">
                   {evt.date}
                 </div>
-                <h3 className="font-bold text-sm text-slate-900">{evt.title}</h3>
-                <p className="text-xs text-slate-500 mt-1">{evt.description}</p>
+                <h3 className="font-bold text-sm text-hd">{evt.title}</h3>
+                <p className="text-xs text-mut mt-1">{evt.description}</p>
               </div>
             </div>
 

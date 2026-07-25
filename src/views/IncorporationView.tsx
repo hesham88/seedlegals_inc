@@ -61,7 +61,7 @@ export const IncorporationView: React.FC<IncorporationViewProps> = ({
       <div className="bg-white rounded-2xl p-5 md:p-6 border border-slate-200 shadow-xs relative">
         <div className="flex items-center justify-between pb-4 border-b border-slate-100 mb-5">
           <div className="flex items-center gap-3">
-            <h2 className="text-lg md:text-xl font-bold text-slate-900">Overview</h2>
+            <h2 className="text-lg md:text-xl font-bold text-hd">Overview</h2>
             <span className="px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-700 text-xs font-semibold border border-emerald-200">
               Active Incorporation
             </span>
@@ -69,12 +69,12 @@ export const IncorporationView: React.FC<IncorporationViewProps> = ({
           <div className="flex items-center gap-1">
             <button
               onClick={onOpenEditOverview}
-              className="p-2 text-slate-400 hover:text-blue-600 hover:bg-slate-50 rounded-xl transition"
+              className="p-2 text-mut hover:text-blue-600 hover:bg-slate-50 rounded-xl transition"
               title="Edit overview"
             >
               <Pencil className="w-4 h-4" />
             </button>
-            <button className="p-2 text-slate-400 hover:text-slate-800 hover:bg-slate-50 rounded-xl transition">
+            <button className="p-2 text-mut hover:text-slate-800 hover:bg-slate-50 rounded-xl transition">
               <MoreVertical className="w-4 h-4" />
             </button>
           </div>
@@ -82,51 +82,52 @@ export const IncorporationView: React.FC<IncorporationViewProps> = ({
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
           <div className="bg-slate-50 p-4 rounded-xl border border-slate-100">
-            <div className="text-xs font-medium text-slate-500 mb-1">Target closing</div>
-            <div className="text-base font-bold text-slate-900">{company.targetClosing}</div>
+            <div className="text-xs font-medium text-mut mb-1">Target closing</div>
+            <div className="text-base font-bold text-hd">{company.targetClosing}</div>
           </div>
           <div className="bg-slate-50 p-4 rounded-xl border border-slate-100">
-            <div className="text-xs font-medium text-slate-500 mb-1">Company name</div>
-            <div className="text-base font-bold text-slate-900 truncate">{company.name}</div>
+            <div className="text-xs font-medium text-mut mb-1">Company name</div>
+            <div className="text-base font-bold text-hd truncate">{company.name}</div>
           </div>
           <div className="bg-slate-50 p-4 rounded-xl border border-slate-100">
-            <div className="text-xs font-medium text-slate-500 mb-1">Suffix</div>
-            <div className="text-base font-bold text-slate-900">{company.suffix}</div>
+            <div className="text-xs font-medium text-mut mb-1">Suffix</div>
+            <div className="text-base font-bold text-hd">{company.suffix}</div>
           </div>
         </div>
       </div>
 
       {/* Timeline Container */}
-      <div className="relative pl-6 md:pl-8 space-y-8 before:absolute before:left-3 md:before:left-4 before:top-4 before:bottom-4 before:w-[2px] before:bg-slate-200">
+      <div className="relative pl-6 md:pl-8 space-y-8">
         
         {/* SECTION 1: Incorporate a Delaware C corp */}
         <div className="relative">
+          <span aria-hidden className="absolute -left-[17px] md:-left-[21px] top-9 -bottom-8 w-[2px]" style={{ background: '#04DCA2' }} />
           {/* Timeline Dot Icon */}
           <div className="absolute -left-6 md:-left-8 top-1.5 w-7 h-7 rounded-full bg-emerald-600 text-white flex items-center justify-center shadow-xs z-10">
             <CheckCircle2 className="w-5 h-5 fill-emerald-600 text-white" />
           </div>
 
-          <div className="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden">
+          <div className="glass-card overflow-hidden">
             {/* Accordion Header */}
             <button
               onClick={() => setSection1Expanded(!section1Expanded)}
               className="w-full px-5 py-4 bg-slate-50/70 hover:bg-slate-50 flex items-center justify-between text-left transition border-b border-slate-100"
             >
-              <div className="text-lg md:text-xl font-bold text-slate-900">
+              <div className="text-lg md:text-xl font-bold text-hd">
                 Incorporate a Delaware C corp
               </div>
-              <ChevronDown className={`w-5 h-5 text-slate-400 transition-transform ${section1Expanded ? 'rotate-180' : ''}`} />
+              <ChevronDown className={`w-5 h-5 text-mut transition-transform ${section1Expanded ? 'rotate-180' : ''}`} />
             </button>
 
             {section1Expanded && (
               <div className="p-5 md:p-6 space-y-6">
                 
                 {/* Card 1: Add stockholders */}
-                <div className="p-5 bg-white rounded-2xl border border-slate-200 shadow-xs relative">
+                <div className="p-5 glass-card relative">
                   <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center gap-3">
                       <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
-                      <h3 className="text-sm font-bold text-slate-900">
+                      <h3 className="text-sm font-bold text-hd">
                         1. Add your stockholders at incorporation
                       </h3>
                     </div>
@@ -142,31 +143,31 @@ export const IncorporationView: React.FC<IncorporationViewProps> = ({
                   {/* Top Share Metrics Grid */}
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 p-4 bg-slate-50 rounded-xl mb-4 text-xs border border-slate-100">
                     <div>
-                      <div className="text-slate-500 mb-0.5">Total authorized shares</div>
-                      <div className="text-sm font-bold text-slate-900">
+                      <div className="text-mut mb-0.5">Total authorized shares</div>
+                      <div className="text-sm font-bold text-hd">
                         {company.totalAuthorizedShares.toLocaleString()}
                       </div>
                     </div>
                     <div>
-                      <div className="text-slate-500 mb-0.5">Reserved for equity pool</div>
-                      <div className="text-sm font-bold text-slate-900">
+                      <div className="text-mut mb-0.5">Reserved for equity pool</div>
+                      <div className="text-sm font-bold text-hd">
                         {company.reservedEquityPool.toLocaleString()}
                       </div>
                     </div>
                     <div>
-                      <div className="text-slate-500 mb-0.5">Par value</div>
-                      <div className="text-sm font-bold text-slate-900">${company.parValue.toFixed(5)}</div>
+                      <div className="text-mut mb-0.5">Par value</div>
+                      <div className="text-sm font-bold text-hd">${company.parValue.toFixed(5)}</div>
                     </div>
                   </div>
 
                   {/* Investor / Stockholders Table */}
                   <div className="border border-slate-200 rounded-xl overflow-x-auto">
                     <table className="w-full text-left text-xs">
-                      <thead className="bg-slate-50 border-b border-slate-200 font-semibold text-slate-700">
+                      <thead className="bg-slate-50 border-b border-slate-200 font-semibold text-body">
                         <tr>
                           <th className="py-3 px-4">
                             <div>Common Stock</div>
-                            <div className="text-[10px] text-slate-400 font-normal">Available to issue</div>
+                            <div className="text-[10px] text-mut font-normal">Available to issue</div>
                           </th>
                           <th className="py-3 px-4 text-right">Edit</th>
                           <th className="py-3 px-4 text-right">PPS</th>
@@ -177,7 +178,7 @@ export const IncorporationView: React.FC<IncorporationViewProps> = ({
                         {stockholders.map((sh) => (
                           <tr key={sh.id} className="hover:bg-slate-50/80 transition">
                             <td className="py-3 px-4">
-                              <div className="flex items-center gap-2.5 font-semibold text-slate-900">
+                              <div className="flex items-center gap-2.5 font-semibold text-hd">
                                 <div className="w-7 h-7 rounded-full bg-slate-900 text-white text-[10px] font-bold flex items-center justify-center shrink-0">
                                   {sh.name.split(' ').map(n => n[0]).join('')}
                                 </div>
@@ -189,19 +190,19 @@ export const IncorporationView: React.FC<IncorporationViewProps> = ({
                                 onClick={onOpenAddStockholder}
                                 className="p-1 hover:text-blue-600"
                               >
-                                <Pencil className="w-3.5 h-3.5 inline text-slate-400" />
+                                <Pencil className="w-3.5 h-3.5 inline text-mut" />
                               </button>
                             </td>
-                            <td className="py-3 px-4 text-right font-mono text-slate-600">
+                            <td className="py-3 px-4 text-right font-mono text-body">
                               ${sh.pricePerShare.toFixed(5)}
                             </td>
-                            <td className="py-3 px-4 text-right font-bold text-slate-900">
+                            <td className="py-3 px-4 text-right font-bold text-hd">
                               {sh.shareCount.toLocaleString()}
                             </td>
                           </tr>
                         ))}
                       </tbody>
-                      <tfoot className="bg-slate-50 border-t border-slate-200 font-bold text-slate-900">
+                      <tfoot className="bg-slate-50 border-t border-slate-200 font-bold text-hd">
                         <tr>
                           <td colSpan={3} className="py-2.5 px-4 text-right">Total Issued</td>
                           <td className="py-2.5 px-4 text-right">{totalIssuedShares.toLocaleString()}</td>
@@ -222,34 +223,34 @@ export const IncorporationView: React.FC<IncorporationViewProps> = ({
                 </div>
 
                 {/* Card 2: Enter details */}
-                <div className="p-5 bg-white rounded-2xl border border-slate-200 shadow-xs">
+                <div className="p-5 glass-card">
                   <div className="flex items-center gap-3 mb-1">
                     <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
-                    <h3 className="text-sm font-bold text-slate-900">
+                    <h3 className="text-sm font-bold text-hd">
                       2. Enter details of your Delaware C corp
                     </h3>
                   </div>
-                  <p className="text-xs text-slate-500 pl-8">
+                  <p className="text-xs text-mut pl-8">
                     These details will be used to generate the Certificate of Incorporation.
                   </p>
                 </div>
 
                 {/* Card 3: Sign Certificate of Incorporation */}
-                <div className="p-5 bg-white rounded-2xl border border-slate-200 shadow-xs">
+                <div className="p-5 glass-card">
                   <div className="flex items-center gap-3 mb-2">
                     <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
-                    <h3 className="text-sm font-bold text-slate-900">
+                    <h3 className="text-sm font-bold text-hd">
                       3. Sign the Certificate of Incorporation
                     </h3>
                   </div>
-                  <p className="text-xs text-slate-500 pl-8 mb-4">
+                  <p className="text-xs text-mut pl-8 mb-4">
                     This is the document required to form your Delaware C corp. Once signed, it can be filed via the registered agent with the Delaware Division of Corporations to complete the process.
                   </p>
 
                   <div className="pl-8">
                     <div className="border border-slate-200 rounded-xl overflow-hidden">
                       <table className="w-full text-left text-xs">
-                        <thead className="bg-slate-50 border-b border-slate-200 font-semibold text-slate-700">
+                        <thead className="bg-slate-50 border-b border-slate-200 font-semibold text-body">
                           <tr>
                             <th className="py-2.5 px-4">Document</th>
                             <th className="py-2.5 px-4 text-center">Share</th>
@@ -259,7 +260,7 @@ export const IncorporationView: React.FC<IncorporationViewProps> = ({
                         </thead>
                         <tbody>
                           <tr className="hover:bg-slate-50 transition">
-                            <td className="py-3 px-4 font-semibold text-slate-900">
+                            <td className="py-3 px-4 font-semibold text-hd">
                               <button
                                 onClick={() => {
                                   const doc = getDoc('doc-coi');
@@ -272,7 +273,7 @@ export const IncorporationView: React.FC<IncorporationViewProps> = ({
                               </button>
                             </td>
                             <td className="py-3 px-4 text-center">
-                              <span className="px-2 py-0.5 rounded-full border border-slate-200 text-slate-400 font-medium">
+                              <span className="px-2 py-0.5 rounded-full border border-slate-200 text-mut font-medium">
                                 -
                               </span>
                             </td>
@@ -287,7 +288,7 @@ export const IncorporationView: React.FC<IncorporationViewProps> = ({
                                   const doc = getDoc('doc-coi');
                                   if (doc) onSelectDocument(doc);
                                 }}
-                                className="p-1 text-slate-400 hover:text-blue-600"
+                                className="p-1 text-mut hover:text-blue-600"
                               >
                                 <MoreVertical className="w-4 h-4" />
                               </button>
@@ -300,14 +301,14 @@ export const IncorporationView: React.FC<IncorporationViewProps> = ({
                 </div>
 
                 {/* Card 4: Submit for review */}
-                <div className="p-5 bg-white rounded-2xl border border-slate-200 shadow-xs">
+                <div className="p-5 glass-card">
                   <div className="flex items-center gap-3 mb-2">
                     <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
-                    <h3 className="text-sm font-bold text-slate-900">
+                    <h3 className="text-sm font-bold text-hd">
                       4. Submit Certificate of Incorporation for review
                     </h3>
                   </div>
-                  <p className="text-xs text-slate-500 pl-8 mb-3">
+                  <p className="text-xs text-mut pl-8 mb-3">
                     We will review your Certificate of Incorporation and make sure there are no issues before sending it to your registered agent in Delaware. They will then file the Certificate of Incorporation to the Delaware Division of Corporations.
                   </p>
                   <div className="pl-8">
@@ -319,16 +320,16 @@ export const IncorporationView: React.FC<IncorporationViewProps> = ({
                 </div>
 
                 {/* Card 5: Expedite filing */}
-                <div className="p-5 bg-white rounded-2xl border border-slate-200 shadow-xs">
+                <div className="p-5 glass-card">
                   <div className="flex items-center gap-3 mb-2">
                     <div className="w-6 h-6 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
                       <Zap className="w-3.5 h-3.5" />
                     </div>
-                    <h3 className="text-sm font-bold text-slate-900">
+                    <h3 className="text-sm font-bold text-hd">
                       5. Expedite your filing with Delaware for $150
                     </h3>
                   </div>
-                  <p className="text-xs text-slate-500 pl-9 mb-3">
+                  <p className="text-xs text-mut pl-9 mb-3">
                     Delaware filing times can be unpredictable, recently we have seen an average wait time of 30 days. Normally expedited filings return in 3 business days.
                   </p>
                   <div className="pl-9">
@@ -340,15 +341,15 @@ export const IncorporationView: React.FC<IncorporationViewProps> = ({
                 </div>
 
                 {/* Card 6: Approved Certificate */}
-                <div className="p-5 bg-white rounded-2xl border border-slate-200 shadow-xs">
+                <div className="p-5 glass-card">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
                       <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
                       <div>
-                        <h3 className="text-sm font-bold text-slate-900">
+                        <h3 className="text-sm font-bold text-hd">
                           6. Approved Certificate of Incorporation
                         </h3>
-                        <p className="text-xs text-slate-500 mt-0.5">
+                        <p className="text-xs text-mut mt-0.5">
                           Your approved Certificate of Incorporation from the Delaware Division of Corporations is ready to download.
                         </p>
                       </div>
@@ -373,39 +374,40 @@ export const IncorporationView: React.FC<IncorporationViewProps> = ({
 
         {/* SECTION 2: Post-incorporation setup */}
         <div className="relative">
+          <span aria-hidden className="absolute -left-[17px] md:-left-[21px] top-9 -bottom-8 w-[2px]" style={{ background: 'linear-gradient(#04DCA2, rgba(95,97,251,.35))' }} />
           {/* Timeline Dot Icon */}
           <div className="absolute -left-6 md:-left-8 top-1.5 w-7 h-7 rounded-full bg-emerald-600 text-white flex items-center justify-center shadow-xs z-10 font-bold text-xs">
             2
           </div>
 
-          <div className="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden">
+          <div className="glass-card overflow-hidden">
             {/* Accordion Header */}
             <button
               onClick={() => setSection2Expanded(!section2Expanded)}
               className="w-full px-5 py-4 bg-slate-50/70 hover:bg-slate-50 flex items-center justify-between text-left transition border-b border-slate-100"
             >
-              <div className="text-lg md:text-xl font-bold text-slate-900">
+              <div className="text-lg md:text-xl font-bold text-hd">
                 2. Post-incorporation setup (from 7-12)
               </div>
-              <ChevronDown className={`w-5 h-5 text-slate-400 transition-transform ${section2Expanded ? 'rotate-180' : ''}`} />
+              <ChevronDown className={`w-5 h-5 text-mut transition-transform ${section2Expanded ? 'rotate-180' : ''}`} />
             </button>
 
             {section2Expanded && (
               <div className="p-5 md:p-6 space-y-6">
 
                 {/* Card 7: Enter new Delaware C corp details */}
-                <div className="p-5 bg-white rounded-2xl border border-slate-200 shadow-xs">
+                <div className="p-5 glass-card">
                   <div className="flex items-center gap-3 mb-2">
                     <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
-                    <h3 className="text-sm font-bold text-slate-900">
+                    <h3 className="text-sm font-bold text-hd">
                       7. Enter new Delaware C corp details
                     </h3>
                   </div>
-                  <p className="text-xs text-slate-500 pl-8 mb-3">
+                  <p className="text-xs text-mut pl-8 mb-3">
                     This date can be found on your approved Certificate of Incorporation.
                   </p>
                   <div className="pl-8 max-w-xs">
-                    <label className="block text-[11px] font-semibold text-slate-400 mb-1 uppercase tracking-wider">
+                    <label className="block text-[11px] font-semibold text-mut mb-1 uppercase tracking-wider">
                       Date of Incorporation
                     </label>
                     <div className="relative">
@@ -416,47 +418,47 @@ export const IncorporationView: React.FC<IncorporationViewProps> = ({
                           setIncorporationDateInput(e.target.value);
                           onUpdateIncorporationDate(e.target.value);
                         }}
-                        className="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs outline-none focus:border-blue-600 font-semibold text-slate-900 bg-slate-50/50"
+                        className="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs outline-none focus:border-blue-600 font-semibold text-hd bg-slate-50/50"
                       />
-                      <CalendarIcon className="w-4 h-4 text-slate-400 absolute right-3 top-2.5 pointer-events-none" />
+                      <CalendarIcon className="w-4 h-4 text-mut absolute right-3 top-2.5 pointer-events-none" />
                     </div>
                   </div>
                 </div>
 
                 {/* Card 8: Key company details */}
-                <div className="p-5 bg-white rounded-2xl border border-slate-200 shadow-xs">
+                <div className="p-5 glass-card">
                   <div className="flex items-center justify-between mb-1">
                     <div className="flex items-center gap-3">
                       <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
-                      <h3 className="text-sm font-bold text-slate-900">
+                      <h3 className="text-sm font-bold text-hd">
                         8. Key company details
                       </h3>
                     </div>
-                    <button onClick={onOpenEditOverview} className="p-1 text-slate-400 hover:text-blue-600">
+                    <button onClick={onOpenEditOverview} className="p-1 text-mut hover:text-blue-600">
                       <Pencil className="w-4 h-4" />
                     </button>
                   </div>
-                  <p className="text-xs text-slate-500 pl-8">
+                  <p className="text-xs text-mut pl-8">
                     This will generate all the documents required to structure your newly formed Delaware C corp, including setting up the board, corporate bylaws, stock restrictions, 83(b) elections, and more.
                   </p>
                 </div>
 
                 {/* Card 9: Initial actions of the company */}
-                <div className="p-5 bg-white rounded-2xl border border-slate-200 shadow-xs">
+                <div className="p-5 glass-card">
                   <div className="flex items-center gap-3 mb-2">
                     <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
-                    <h3 className="text-sm font-bold text-slate-900">
+                    <h3 className="text-sm font-bold text-hd">
                       9. Initial actions of the company
                     </h3>
                   </div>
-                  <p className="text-xs text-slate-500 pl-8 mb-4">
+                  <p className="text-xs text-mut pl-8 mb-4">
                     Sign all of the documents to complete all initial actions of your company. Once the 'Initial action of the board' document is fully signed, the 30-day deadline to sign, download, and mail your 83(b) election begins.
                   </p>
 
                   <div className="pl-8">
                     <div className="border border-slate-200 rounded-xl overflow-x-auto">
                       <table className="w-full text-left text-xs">
-                        <thead className="bg-slate-50 border-b border-slate-200 font-semibold text-slate-700">
+                        <thead className="bg-slate-50 border-b border-slate-200 font-semibold text-body">
                           <tr>
                             <th className="py-2.5 px-4">Document</th>
                             <th className="py-2.5 px-4 text-center">Share</th>
@@ -473,7 +475,7 @@ export const IncorporationView: React.FC<IncorporationViewProps> = ({
                             { doc: getDoc('doc-sc'), share: '1/1' },
                           ].map(({ doc, share }, i) => (
                             <tr key={i} className="hover:bg-slate-50 transition">
-                              <td className="py-3 px-4 font-semibold text-slate-900">
+                              <td className="py-3 px-4 font-semibold text-hd">
                                 <button
                                   onClick={() => doc && onSelectDocument(doc)}
                                   className="hover:text-blue-600 flex items-center gap-2 text-left"
@@ -483,7 +485,7 @@ export const IncorporationView: React.FC<IncorporationViewProps> = ({
                                 </button>
                               </td>
                               <td className="py-3 px-4 text-center">
-                                <span className="px-2.5 py-0.5 rounded-full border border-slate-200 text-slate-500 font-medium text-[11px]">
+                                <span className="px-2.5 py-0.5 rounded-full border border-slate-200 text-mut font-medium text-[11px]">
                                   {share}
                                 </span>
                               </td>
@@ -495,7 +497,7 @@ export const IncorporationView: React.FC<IncorporationViewProps> = ({
                               <td className="py-3 px-4 text-right">
                                 <button
                                   onClick={() => doc && onSelectDocument(doc)}
-                                  className="p-1 text-slate-400 hover:text-blue-600"
+                                  className="p-1 text-mut hover:text-blue-600"
                                 >
                                   <MoreVertical className="w-4 h-4" />
                                 </button>
@@ -509,19 +511,19 @@ export const IncorporationView: React.FC<IncorporationViewProps> = ({
                 </div>
 
                 {/* Card 10: Stock Purchase Agreements */}
-                <div className="p-5 bg-white rounded-2xl border border-slate-200 shadow-xs">
+                <div className="p-5 glass-card">
                   <div className="flex items-center gap-3 mb-2">
                     <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
-                    <h3 className="text-sm font-bold text-slate-900">
+                    <h3 className="text-sm font-bold text-hd">
                       10. Stock Purchase Agreements
                     </h3>
                   </div>
-                  <p className="text-xs text-slate-500 pl-8 mb-4">
+                  <p className="text-xs text-mut pl-8 mb-4">
                     The Stock Purchase Agreement issues shares in your new Delaware C corp to the initial stockholders in exchange for a purchase price. This also records the core terms of that issuance for your company's official records.
                   </p>
 
                   <div className="pl-8 border border-slate-200 rounded-xl overflow-hidden">
-                    <div className="p-3.5 bg-slate-50 flex items-center justify-between border-b border-slate-100 text-xs font-semibold text-slate-900">
+                    <div className="p-3.5 bg-slate-50 flex items-center justify-between border-b border-slate-100 text-xs font-semibold text-hd">
                       <span>Stock Purchase Agreement</span>
                       <button
                         onClick={() => {
@@ -538,15 +540,15 @@ export const IncorporationView: React.FC<IncorporationViewProps> = ({
                 </div>
 
                 {/* Card 11: Stock Restrictions and 83(b) Elections Preparation */}
-                <div className="p-5 bg-white rounded-2xl border border-slate-200 shadow-xs">
+                <div className="p-5 glass-card">
                   <div className="flex items-center gap-3 mb-2">
                     <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
-                    <h3 className="text-sm font-bold text-slate-900">
+                    <h3 className="text-sm font-bold text-hd">
                       11. Stock Restrictions and 83(b) Elections Preparation
                     </h3>
                   </div>
                   <div className="pl-8 space-y-3">
-                    <p className="text-xs text-slate-500 leading-relaxed">
+                    <p className="text-xs text-mut leading-relaxed">
                       Stock restrictions are conditions that prevent unvested shares from being fully owned or freely transferred until they vest. Prepares formal documents for 83(b) submission.
                     </p>
 
@@ -555,7 +557,7 @@ export const IncorporationView: React.FC<IncorporationViewProps> = ({
                         { name: 'Stock Restriction Agreement', doc: getDoc('doc-sra') },
                         { name: '83(b) Election Preparation Form', doc: getDoc('doc-83b') },
                       ].map((item, idx) => (
-                        <div key={idx} className="p-3.5 bg-white hover:bg-slate-50 flex items-center justify-between text-xs font-semibold text-slate-900 transition">
+                        <div key={idx} className="p-3.5 bg-white hover:bg-slate-50 flex items-center justify-between text-xs font-semibold text-hd transition">
                           <span>{item.name}</span>
                           <button
                             onClick={() => item.doc && onSelectDocument(item.doc)}
@@ -571,14 +573,14 @@ export const IncorporationView: React.FC<IncorporationViewProps> = ({
                 </div>
 
                 {/* Card 12: Post-incorporation documents for founding members */}
-                <div className="p-5 bg-white rounded-2xl border border-slate-200 shadow-xs">
+                <div className="p-5 glass-card">
                   <div className="flex items-center gap-3 mb-2">
                     <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
-                    <h3 className="text-sm font-bold text-slate-900">
+                    <h3 className="text-sm font-bold text-hd">
                       12. Post-incorporation agreements for founding members
                     </h3>
                   </div>
-                  <p className="text-xs text-slate-500 pl-8 mb-4">
+                  <p className="text-xs text-mut pl-8 mb-4">
                     Indemnification agreements protect directors from personal liability, and CIIAAs ensure the company owns its IP and that confidential information stays private.
                   </p>
 
@@ -587,7 +589,7 @@ export const IncorporationView: React.FC<IncorporationViewProps> = ({
                       { name: 'Director and Officer Indemnification Agreement', doc: getDoc('doc-indemnity') },
                       { name: 'Confidential Information and Invention Assignment Agreement', doc: getDoc('doc-ciiaa') },
                     ].map((item, idx) => (
-                      <div key={idx} className="p-3.5 bg-white hover:bg-slate-50 flex items-center justify-between text-xs font-semibold text-slate-900 transition">
+                      <div key={idx} className="p-3.5 bg-white hover:bg-slate-50 flex items-center justify-between text-xs font-semibold text-hd transition">
                         <span>{item.name}</span>
                         <button
                           onClick={() => item.doc && onSelectDocument(item.doc)}

@@ -28,8 +28,8 @@ export const MyDocumentsView: React.FC<MyDocumentsViewProps> = ({
       {/* View Header */}
       <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-xs flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
-          <h2 className="text-xl font-bold text-slate-900">My Legal Documents & Vault</h2>
-          <p className="text-xs text-slate-500 mt-1">
+          <h2 className="text-xl font-bold text-hd">My Legal Documents & Vault</h2>
+          <p className="text-xs text-mut mt-1">
             Apex Dynamics Inc. • State of Delaware Corporate Vault (9 Documents)
           </p>
         </div>
@@ -49,7 +49,7 @@ export const MyDocumentsView: React.FC<MyDocumentsViewProps> = ({
               className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold transition whitespace-nowrap ${
                 filterCategory === cat
                   ? 'bg-blue-600 text-white shadow-xs'
-                  : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200'
+                  : 'bg-white text-body hover:bg-slate-100 border border-slate-200'
               }`}
             >
               {cat}
@@ -58,22 +58,22 @@ export const MyDocumentsView: React.FC<MyDocumentsViewProps> = ({
         </div>
 
         <div className="relative min-w-[220px]">
-          <Search className="w-4 h-4 text-slate-400 absolute left-3 top-2.5" />
+          <Search className="w-4 h-4 text-mut absolute left-3 top-2.5" />
           <input
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search document vault..."
-            className="w-full pl-9 pr-3 py-1.5 rounded-xl border border-slate-200 bg-white text-xs outline-none focus:border-blue-600 text-slate-900"
+            className="w-full pl-9 pr-3 py-1.5 rounded-xl border border-slate-200 bg-white text-xs outline-none focus:border-blue-600 text-hd"
           />
         </div>
       </div>
 
       {/* Documents List Table */}
-      <div className="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden">
+      <div className="glass-card overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
-            <thead className="bg-slate-50 border-b border-slate-200 font-bold text-slate-700 uppercase text-[10px] tracking-wider">
+            <thead className="bg-slate-50 border-b border-slate-200 font-bold text-body uppercase text-[10px] tracking-wider">
               <tr>
                 <th className="py-3 px-4">Document Title</th>
                 <th className="py-3 px-4">Category</th>
@@ -85,7 +85,7 @@ export const MyDocumentsView: React.FC<MyDocumentsViewProps> = ({
             <tbody className="divide-y divide-slate-100">
               {filteredDocs.map((doc) => (
                 <tr key={doc.id} className="hover:bg-slate-50 transition">
-                  <td className="py-3.5 px-4 font-semibold text-slate-900">
+                  <td className="py-3.5 px-4 font-semibold text-hd">
                     <button
                       onClick={() => onSelectDocument(doc)}
                       className="text-left hover:text-blue-600 flex items-center gap-2.5"
@@ -94,18 +94,18 @@ export const MyDocumentsView: React.FC<MyDocumentsViewProps> = ({
                         <FileText className="w-4 h-4" />
                       </div>
                       <div>
-                        <div className="text-xs font-bold text-slate-900">{doc.name}</div>
-                        <div className="text-[11px] text-slate-500 font-normal line-clamp-1">{doc.description}</div>
+                        <div className="text-xs font-bold text-hd">{doc.name}</div>
+                        <div className="text-[11px] text-mut font-normal line-clamp-1">{doc.description}</div>
                       </div>
                     </button>
                   </td>
                   <td className="py-3.5 px-4">
-                    <span className="px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700 text-[10px] font-bold">
+                    <span className="px-2.5 py-1 rounded-lg bg-slate-100 text-body text-[10px] font-bold">
                       {doc.category}
                     </span>
                   </td>
                   <td className="py-3.5 px-4 text-center">
-                    <span className="px-2.5 py-0.5 rounded-full border border-slate-200 text-slate-500 font-medium">
+                    <span className="px-2.5 py-0.5 rounded-full border border-slate-200 text-mut font-medium">
                       {doc.shareCountText}
                     </span>
                   </td>

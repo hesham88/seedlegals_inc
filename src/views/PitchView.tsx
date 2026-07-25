@@ -14,21 +14,21 @@ export const PitchView: React.FC = () => {
   return (
     <div className="space-y-6 max-w-5xl mx-auto pb-12">
       <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-xs">
-        <h2 className="text-xl font-bold text-slate-900">Investor Pitch & Data Room</h2>
-        <p className="text-xs text-slate-500 mt-1">
+        <h2 className="text-xl font-bold text-hd">Investor Pitch & Data Room</h2>
+        <p className="text-xs text-mut mt-1">
           Share secured pitch materials and due diligence documents with prospective investors
         </p>
       </div>
 
       <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-xs space-y-6">
         <div>
-          <h3 className="text-sm font-bold text-slate-900 mb-2">Secure Investor Sharing Link</h3>
+          <h3 className="text-sm font-bold text-hd mb-2">Secure Investor Sharing Link</h3>
           <div className="flex items-center gap-2 max-w-xl">
             <input
               type="text"
               readOnly
               value={dataRoomUrl}
-              className="w-full px-3.5 py-2 rounded-xl bg-slate-50 border border-slate-200 text-xs font-mono text-slate-700 outline-none"
+              className="w-full px-3.5 py-2 rounded-xl bg-slate-50 border border-slate-200 text-xs font-mono text-body outline-none"
             />
             <button
               onClick={handleCopy}
@@ -41,9 +41,9 @@ export const PitchView: React.FC = () => {
         </div>
 
         <div className="p-8 border-2 border-dashed border-slate-200 rounded-2xl text-center hover:border-blue-600 transition cursor-pointer bg-slate-50/50">
-          <Upload className="w-8 h-8 text-slate-400 mx-auto mb-2" />
-          <div className="text-xs font-bold text-slate-900">Upload Pitch Deck PDF</div>
-          <div className="text-[11px] text-slate-500 mt-0.5">Drag and drop your deck or click to browse</div>
+          <Upload className="w-8 h-8 text-mut mx-auto mb-2" />
+          <div className="text-xs font-bold text-hd">Upload Pitch Deck PDF</div>
+          <div className="text-[11px] text-mut mt-0.5">Drag and drop your deck or click to browse</div>
         </div>
       </div>
     </div>

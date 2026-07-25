@@ -71,26 +71,27 @@ export const SectionObtainEIN: React.FC<SectionObtainEINProps> = ({
 
   return (
     <div className="relative">
+      <span aria-hidden className="absolute -left-[17px] md:-left-[21px] top-9 -bottom-8 w-[2px]" style={{ background: 'var(--divider)' }} />
       {/* Timeline Dot Icon */}
       <div className="absolute -left-6 md:-left-8 top-1.5 w-7 h-7 rounded-full bg-blue-600 text-white flex items-center justify-center shadow-xs z-10 font-bold text-xs">
         4
       </div>
 
-      <div className="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden">
+      <div className="glass-card overflow-hidden">
         {/* Accordion Header */}
         <button
           onClick={() => setExpanded(!expanded)}
           className="w-full px-5 py-4 bg-slate-50/70 hover:bg-slate-50 flex items-center justify-between text-left transition border-b border-slate-100"
         >
           <div className="flex items-center gap-3">
-            <div className="text-lg md:text-xl font-bold text-slate-900">
+            <div className="text-lg md:text-xl font-bold text-hd">
               4. Obtain EIN (Synched workflow with InCorp account automatically)
             </div>
             <span className="px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-700 text-xs font-semibold border border-emerald-200 flex items-center gap-1">
               <Zap className="w-3 h-3 text-emerald-600" /> InCorp Live Sync
             </span>
           </div>
-          <ChevronDown className={`w-5 h-5 text-slate-400 transition-transform ${expanded ? 'rotate-180' : ''}`} />
+          <ChevronDown className={`w-5 h-5 text-mut transition-transform ${expanded ? 'rotate-180' : ''}`} />
         </button>
 
         {expanded && (
@@ -136,7 +137,7 @@ export const SectionObtainEIN: React.FC<SectionObtainEINProps> = ({
                       type="text"
                       value={currentEin}
                       onChange={(e) => setCurrentEin(e.target.value)}
-                      className="px-3 py-1.5 rounded-xl border border-emerald-300 text-base font-mono font-bold text-slate-900 bg-white outline-none focus:ring-2 focus:ring-blue-600"
+                      className="px-3 py-1.5 rounded-xl border border-emerald-300 text-base font-mono font-bold text-hd bg-white outline-none focus:ring-2 focus:ring-blue-600"
                     />
                     <button
                       onClick={handleSaveEin}
@@ -146,7 +147,7 @@ export const SectionObtainEIN: React.FC<SectionObtainEINProps> = ({
                     </button>
                   </div>
                 ) : (
-                  <div className="text-2xl font-mono font-extrabold text-slate-900 mt-0.5 flex items-center gap-3">
+                  <div className="text-2xl font-mono font-extrabold text-hd mt-0.5 flex items-center gap-3">
                     <span>{maskEIN(currentEin, privacyMode)}</span>
                     <button
                       onClick={() => setIsEditingEin(true)}
@@ -178,11 +179,11 @@ export const SectionObtainEIN: React.FC<SectionObtainEINProps> = ({
                 onClick={() => setEinOption('ssn_sync')}
                 className={`p-3.5 rounded-xl text-left transition flex items-start gap-3 ${
                   einOption === 'ssn_sync'
-                    ? 'bg-white shadow-xs border border-slate-200 text-slate-900'
+                    ? 'bg-white shadow-xs border border-slate-200 text-hd'
                     : 'text-slate-600 hover:bg-slate-100/70'
                 }`}
               >
-                <div className={`p-2 rounded-lg ${einOption === 'ssn_sync' ? 'bg-blue-50 text-blue-600' : 'bg-slate-200 text-slate-600'}`}>
+                <div className={`p-2 rounded-lg ${einOption === 'ssn_sync' ? 'bg-blue-50 text-blue-600' : 'bg-slate-200 text-body'}`}>
                   <Zap className="w-5 h-5" />
                 </div>
                 <div>
@@ -190,7 +191,7 @@ export const SectionObtainEIN: React.FC<SectionObtainEINProps> = ({
                     <span className="text-xs font-bold">Option A: SSN / ITIN Instant IRS Sync</span>
                     <span className="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-bold">Automated</span>
                   </div>
-                  <p className="text-[11px] text-slate-500 mt-0.5">
+                  <p className="text-[11px] text-mut mt-0.5">
                     For US Responsible Party. InCorp triggers instant automated IRS API transmission.
                   </p>
                 </div>
@@ -200,11 +201,11 @@ export const SectionObtainEIN: React.FC<SectionObtainEINProps> = ({
                 onClick={() => setEinOption('no_ssn_incorp')}
                 className={`p-3.5 rounded-xl text-left transition flex items-start gap-3 ${
                   einOption === 'no_ssn_incorp'
-                    ? 'bg-white shadow-xs border border-slate-200 text-slate-900'
+                    ? 'bg-white shadow-xs border border-slate-200 text-hd'
                     : 'text-slate-600 hover:bg-slate-100/70'
                 }`}
               >
-                <div className={`p-2 rounded-lg ${einOption === 'no_ssn_incorp' ? 'bg-blue-50 text-blue-600' : 'bg-slate-200 text-slate-600'}`}>
+                <div className={`p-2 rounded-lg ${einOption === 'no_ssn_incorp' ? 'bg-blue-50 text-blue-600' : 'bg-slate-200 text-body'}`}>
                   <Globe className="w-5 h-5" />
                 </div>
                 <div>
@@ -212,7 +213,7 @@ export const SectionObtainEIN: React.FC<SectionObtainEINProps> = ({
                     <span className="text-xs font-bold">Option B: No SSN (InCorp Express Concierge)</span>
                     <span className="px-2 py-0.5 rounded-full bg-blue-100 text-blue-800 text-[10px] font-bold">International</span>
                   </div>
-                  <p className="text-[11px] text-slate-500 mt-0.5">
+                  <p className="text-[11px] text-mut mt-0.5">
                     For foreign founders without SSN. InCorp acts as Third-Party Designee via Express IRS Fax.
                   </p>
                 </div>
@@ -225,18 +226,18 @@ export const SectionObtainEIN: React.FC<SectionObtainEINProps> = ({
                 <div className="flex items-center justify-between pb-3 border-b border-slate-200">
                   <div className="flex items-center gap-2">
                     <ShieldCheck className="w-5 h-5 text-blue-600" />
-                    <h4 className="text-sm font-bold text-slate-900">
+                    <h4 className="text-sm font-bold text-hd">
                       InCorp Direct IRS API Sync (SSN / ITIN)
                     </h4>
                   </div>
-                  <span className="text-[11px] font-medium text-slate-500">
+                  <span className="text-[11px] font-medium text-mut">
                     SS-4 Instant Auto-Filing
                   </span>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-xs font-semibold text-slate-700 mb-1">
+                    <label className="block text-xs font-semibold text-body mb-1">
                       Responsible Party Legal Name
                     </label>
                     <input
@@ -248,7 +249,7 @@ export const SectionObtainEIN: React.FC<SectionObtainEINProps> = ({
                   </div>
 
                   <div>
-                    <label className="block text-xs font-semibold text-slate-700 mb-1">
+                    <label className="block text-xs font-semibold text-body mb-1">
                       Responsible Party SSN or ITIN
                     </label>
                     <div className="relative">
@@ -256,12 +257,12 @@ export const SectionObtainEIN: React.FC<SectionObtainEINProps> = ({
                         type={showSsn && !privacyMode ? 'text' : 'password'}
                         value={privacyMode ? '***-**-****' : ssnVal}
                         onChange={(e) => setSsnVal(e.target.value)}
-                        className="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs font-mono text-slate-900 bg-white pr-10 focus:border-blue-600 outline-none"
+                        className="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs font-mono text-hd bg-white pr-10 focus:border-blue-600 outline-none"
                       />
                       <button
                         type="button"
                         onClick={() => setShowSsn(!showSsn)}
-                        className="absolute right-2.5 top-2 text-slate-400 hover:text-slate-600"
+                        className="absolute right-2.5 top-2 text-mut hover:text-slate-600"
                       >
                         {showSsn ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                       </button>
@@ -270,24 +271,24 @@ export const SectionObtainEIN: React.FC<SectionObtainEINProps> = ({
                 </div>
 
                 <div className="p-4 bg-white rounded-xl border border-slate-200 space-y-2 text-xs">
-                  <div className="font-bold text-slate-900 mb-1">Automated Sync Audit Log:</div>
-                  <div className="flex items-center justify-between text-slate-600">
+                  <div className="font-bold text-hd mb-1">Automated Sync Audit Log:</div>
+                  <div className="flex items-center justify-between text-body">
                     <span className="flex items-center gap-2">
                       <CheckCircle2 className="w-4 h-4 text-emerald-600" /> 1. Certificate of Incorporation verified with Delaware
                     </span>
-                    <span className="text-[11px] font-mono text-slate-400">FILE #8934102</span>
+                    <span className="text-[11px] font-mono text-mut">FILE #8934102</span>
                   </div>
-                  <div className="flex items-center justify-between text-slate-600">
+                  <div className="flex items-center justify-between text-body">
                     <span className="flex items-center gap-2">
                       <CheckCircle2 className="w-4 h-4 text-emerald-600" /> 2. InCorp Registered Agent address configured
                     </span>
-                    <span className="text-[11px] font-mono text-slate-400">1209 N Orange St</span>
+                    <span className="text-[11px] font-mono text-mut">1209 N Orange St</span>
                   </div>
-                  <div className="flex items-center justify-between text-slate-600">
+                  <div className="flex items-center justify-between text-body">
                     <span className="flex items-center gap-2">
                       <CheckCircle2 className="w-4 h-4 text-emerald-600" /> 3. IRS Form SS-4 payload transmitted
                     </span>
-                    <span className="text-[11px] font-mono text-slate-400">CP 575 Received</span>
+                    <span className="text-[11px] font-mono text-mut">CP 575 Received</span>
                   </div>
                 </div>
 
@@ -310,11 +311,11 @@ export const SectionObtainEIN: React.FC<SectionObtainEINProps> = ({
                 <div className="flex items-center justify-between pb-3 border-b border-slate-200">
                   <div className="flex items-center gap-2">
                     <Globe className="w-5 h-5 text-blue-600" />
-                    <h4 className="text-sm font-bold text-slate-900">
+                    <h4 className="text-sm font-bold text-hd">
                       InCorp Non-US Founder EIN Concierge (No SSN Required)
                     </h4>
                   </div>
-                  <span className="text-[11px] font-medium text-slate-500">
+                  <span className="text-[11px] font-medium text-mut">
                     IRS Third-Party Designee
                   </span>
                 </div>
@@ -328,13 +329,13 @@ export const SectionObtainEIN: React.FC<SectionObtainEINProps> = ({
                     className="mt-0.5 rounded border-slate-300 text-blue-600 focus:ring-blue-600"
                   />
                   <label htmlFor="designee-check" className="cursor-pointer">
-                    <strong className="block text-slate-900">Authorize InCorp Inc. as IRS Third-Party Designee</strong>
+                    <strong className="block text-hd">Authorize InCorp Inc. as IRS Third-Party Designee</strong>
                     InCorp will use its registered Delaware agent address (1209 North Orange Street, Wilmington DE) and submit Form SS-4 directly to the IRS Toll-Free Fax unit for foreign founders.
                   </label>
                 </div>
 
                 <div className="p-4 bg-white rounded-xl border border-slate-200 space-y-3">
-                  <div className="text-xs font-bold text-slate-900 flex items-center justify-between">
+                  <div className="text-xs font-bold text-hd flex items-center justify-between">
                     <span>InCorp Concierge Processing Tracker</span>
                     <span className="text-[11px] text-emerald-700 font-semibold bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full">
                       CP 575 Notice Generated
@@ -346,21 +347,21 @@ export const SectionObtainEIN: React.FC<SectionObtainEINProps> = ({
                       <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
                       <div>
                         <div className="font-bold text-slate-800">1. Form SS-4 Drafted</div>
-                        <div className="text-[10px] text-slate-500">Foreign Founder specs added</div>
+                        <div className="text-[10px] text-mut">Foreign Founder specs added</div>
                       </div>
                     </div>
                     <div className="p-2.5 bg-slate-50 rounded-lg border border-slate-100 flex items-center gap-2">
                       <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
                       <div>
                         <div className="font-bold text-slate-800">2. IRS Express Faxed</div>
-                        <div className="text-[10px] text-slate-500">InCorp agent fax unit</div>
+                        <div className="text-[10px] text-mut">InCorp agent fax unit</div>
                       </div>
                     </div>
                     <div className="p-2.5 bg-slate-50 rounded-lg border border-slate-100 flex items-center gap-2">
                       <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
                       <div>
                         <div className="font-bold text-slate-800">3. CP 575 Issued</div>
-                        <div className="text-[10px] text-slate-500">EIN: {currentEin}</div>
+                        <div className="text-[10px] text-mut">EIN: {currentEin}</div>
                       </div>
                     </div>
                   </div>
