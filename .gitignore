@@ -6,3 +6,11 @@ coverage/
 *.log
 .env*
 !.env.example
+
+# Local-only case/document archive — never publish
+docs/
+
+# Agent / session-tooling folders (Claude Code, remember tool)
+.remember/
+.claude/
+CLAUDE.md
