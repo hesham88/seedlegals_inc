@@ -22,7 +22,7 @@ export const initialStockholders: Stockholder[] = [
   {
     id: 'sh-1',
     name: 'Alex Morgan',
-    email: 'alex.morgan@apexdynamics.io',
+    email: 'alex.morgan@apexdynamics.example',
     shareClass: 'Common',
     shareCount: 9000000,
     pricePerShare: 0.00001,

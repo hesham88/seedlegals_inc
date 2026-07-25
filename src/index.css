@@ -1,13 +1,14 @@
 @import "tailwindcss";
 
+/* Class-based dark mode (Tailwind v4) — toggled by <html class="dark"> */
+@custom-variant dark (&:where(.dark, .dark *));
+
 /*
- * Design system adopted from the new Claude mock:
+ * Design system:
  *   - Type:   Manrope (display + body)
  *   - Brand:  indigo  #5F61FB   (remaps the app's blue/indigo scale)
  *   - Accent: teal    #04DCA2   (remaps emerald/green — success / "done")
- *   - Ground: warm off-white #faf9f5 (remaps slate-50)
- * Remapping the token scales re-skins every existing utility class app-wide
- * without touching each component.
+ *   - Ground: aurora gradient + glass surfaces
  */
 @theme {
   --font-sans: 'Manrope', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
@@ -57,32 +58,177 @@
   --color-teal-500: #04dca2;
   --color-teal-600: #04a97e;
 
-  /* Warm ground */
   --color-slate-50: #faf9f5;
+}
+
+/* ---------------------------------------------------------------------------
+ * Glass theme tokens. Every glass surface reads these, so light/dark is one
+ * variable swap rather than a `dark:` class on every element.
+ * ------------------------------------------------------------------------- */
+:root {
+  --app-bg: linear-gradient(135deg, #eceafe 0%, #f4f0ff 30%, #e8f9f4 100%);
+  --blob-1: radial-gradient(circle, rgba(95, 97, 251, .35), transparent 70%);
+  --blob-2: radial-gradient(circle, rgba(4, 220, 162, .28), transparent 70%);
+  --blob-3: radial-gradient(circle, rgba(190, 120, 255, .25), transparent 70%);
+
+  --bar-bg: rgba(95, 97, 251, .72);
+  --bar-border: rgba(255, 255, 255, .35);
+  --bar-chip: rgba(255, 255, 255, .18);
+  --bar-chip-border: rgba(255, 255, 255, .3);
+
+  --side-bg: rgba(255, 255, 255, .55);
+  --side-border: rgba(255, 255, 255, .7);
+
+  --card: rgba(255, 255, 255, .55);
+  --card-strong: rgba(255, 255, 255, .72);
+  --card-faint: rgba(255, 255, 255, .4);
+  --card-border: rgba(255, 255, 255, .75);
+  --card-border-strong: rgba(95, 97, 251, .4);
+
+  --hd: #000646;
+  --txt: rgba(0, 6, 70, .85);
+  --mut: rgba(0, 6, 70, .55);
+  --mut-2: #616161;
+
+  --acc: #5f61fb;
+  --acc-grad: linear-gradient(135deg, #5f61fb, #7b6cff);
+  --nav-active-bg: rgba(95, 97, 251, .12);
+  --nav-active-border: rgba(95, 97, 251, .18);
+  --nav-active-txt: #5f61fb;
+
+  --pill-bg: #cfd0ff;
+  --pill-txt: #4a4ce0;
+  --chip-bg: rgba(0, 6, 70, .06);
+
+  --ok: #04dca2;
+  --ok-txt: #04a97e;
+  --ok-bg: rgba(4, 220, 162, .14);
+  --ok-border: rgba(4, 220, 162, .35);
+
+  --warn-bg: rgba(255, 220, 120, .35);
+  --warn-border: rgba(200, 150, 20, .25);
+  --warn-txt: #7a5a00;
+
+  --divider: rgba(0, 6, 70, .07);
+  --thead-bg: rgba(0, 6, 70, .04);
+
+  --glow-acc: 0 8px 32px rgba(95, 97, 251, .14);
+  --btn-glow: 0 4px 16px rgba(95, 97, 251, .4);
+}
+
+.dark {
+  --app-bg: #07082b;
+  --blob-1: radial-gradient(circle, rgba(95, 97, 251, .40), transparent 70%);
+  --blob-2: radial-gradient(circle, rgba(4, 220, 162, .18), transparent 70%);
+  --blob-3: radial-gradient(circle, rgba(160, 90, 255, .22), transparent 70%);
+
+  --bar-bg: rgba(15, 17, 60, .55);
+  --bar-border: rgba(140, 142, 255, .18);
+  --bar-chip: rgba(140, 142, 255, .1);
+  --bar-chip-border: rgba(140, 142, 255, .2);
+
+  --side-bg: rgba(12, 14, 50, .5);
+  --side-border: rgba(140, 142, 255, .14);
+
+  --card: rgba(22, 24, 72, .5);
+  --card-strong: rgba(26, 28, 84, .6);
+  --card-faint: rgba(22, 24, 72, .35);
+  --card-border: rgba(140, 142, 255, .16);
+  --card-border-strong: rgba(140, 142, 255, .35);
+
+  --hd: #f0f0ff;
+  --txt: rgba(230, 231, 255, .9);
+  --mut: rgba(200, 202, 255, .55);
+  --mut-2: rgba(190, 192, 255, .6);
+
+  --acc: #8b8dff;
+  --nav-active-bg: rgba(95, 97, 251, .22);
+  --nav-active-border: rgba(140, 142, 255, .3);
+  --nav-active-txt: #c9caff;
+
+  --pill-bg: rgba(140, 142, 255, .2);
+  --pill-txt: #c9caff;
+  --chip-bg: rgba(140, 142, 255, .12);
+
+  --ok-txt: #04dca2;
+  --ok-bg: rgba(4, 220, 162, .12);
+  --ok-border: rgba(4, 220, 162, .3);
+
+  --warn-bg: rgba(255, 196, 60, .12);
+  --warn-border: rgba(255, 196, 60, .25);
+  --warn-txt: #ffd479;
+
+  --divider: rgba(140, 142, 255, .12);
+  --thead-bg: rgba(140, 142, 255, .08);
+
+  --glow-acc: 0 8px 40px rgba(95, 97, 251, .25);
+  --btn-glow: 0 4px 20px rgba(95, 97, 251, .6);
 }
 
 @layer base {
   body {
     font-family: 'Manrope', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-    background-color: #faf9f5;
-    color: #0f172a;
+    background: var(--app-bg);
+    color: var(--txt);
   }
+  h1, h2, h3, h4 { color: var(--hd); }
 }
 
-.status-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  display: inline-block;
+/* --- Glass component classes ---------------------------------------------
+ * Replace `bg-white border-slate-200 rounded-2xl shadow-xs` with `glass-card`.
+ * ------------------------------------------------------------------------- */
+@layer components {
+  .glass-card {
+    background: var(--card-strong);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--card-border);
+    border-radius: 1rem;
+  }
+  .glass-card-soft {
+    background: var(--card);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--card-border);
+    border-radius: 1rem;
+  }
+  .glass-inset {
+    background: var(--card-faint);
+    border: 1px solid var(--card-border);
+    border-radius: .75rem;
+  }
+  .glass-card-active {
+    background: var(--card-strong);
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
+    border: 1.5px solid var(--card-border-strong);
+    border-radius: 1rem;
+    box-shadow: var(--glow-acc);
+  }
+  .btn-primary {
+    background: var(--acc-grad);
+    color: #fff;
+    box-shadow: var(--btn-glow);
+    border-radius: 999px;
+    font-weight: 600;
+  }
+  .btn-ghost {
+    border: 1px solid var(--acc);
+    color: var(--acc);
+    border-radius: 999px;
+    font-weight: 600;
+  }
+  .btn-ghost:hover { background: var(--nav-active-bg); }
+  .pill { background: var(--pill-bg); color: var(--pill-txt); border-radius: 999px; font-weight: 600; }
+  .pill-ok { background: var(--ok-bg); color: var(--ok-txt); border: 1px solid var(--ok-border); border-radius: 999px; font-weight: 600; }
+  .pill-warn { background: var(--warn-bg); color: var(--warn-txt); border: 1px solid var(--warn-border); border-radius: 999px; font-weight: 600; }
+  .table-head { background: var(--thead-bg); color: var(--mut-2); }
+  .row-divide { border-top: 1px solid var(--divider); }
+  .text-hd { color: var(--hd); }
+  .text-body { color: var(--txt); }
+  .text-mut { color: var(--mut); }
+  .no-scrollbar { scrollbar-width: none; }
+  .no-scrollbar::-webkit-scrollbar { display: none; }
 }
 
-.active-nav {
-  background-color: #f4f0ff;
-  color: #4a4ce0;
-  border-right: 3px solid #5f61fb;
-}
-
-.glass {
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(12px);
-}
+.status-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }

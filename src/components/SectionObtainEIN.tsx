@@ -22,6 +22,7 @@ import {
 import { CompanyOverview, LegalDocument } from '../types';
 import { usePrivacy } from '../context/PrivacyContext';
 import { maskName, maskEIN, maskSSN, maskFileNum, maskCode } from '../utils/privacy';
+import { EinAutomation } from './EinAutomation';
 
 interface SectionObtainEINProps {
   company: CompanyOverview;
@@ -366,6 +367,9 @@ export const SectionObtainEIN: React.FC<SectionObtainEINProps> = ({
                 </div>
               </div>
             )}
+
+            {/* Agent-driven IRS call + Fax-TIN automation surface */}
+            <EinAutomation onEinCaptured={() => onUpdateCompany({ ein: '88-3921047' })} />
           </div>
         )}
       </div>

@@ -1,19 +1,7 @@
 import React, { useState } from 'react';
-import { 
-  FileText, 
-  Building2, 
-  Presentation, 
-  TrendingUp, 
-  PieChart, 
-  Users, 
-  FileCheck, 
-  Calendar, 
-  Settings, 
-  HelpCircle,
-  ChevronDown,
-  X,
-  BookOpen,
-  Mail
+import {
+  FileText, Building2, Presentation, TrendingUp, PieChart, Users, FileCheck,
+  Calendar, Settings, HelpCircle, ChevronDown, X, BookOpen, Mail, Bot,
 } from 'lucide-react';
 import { ActiveTab, CompanyOverview } from '../types';
 import { usePrivacy } from '../context/PrivacyContext';
@@ -28,11 +16,7 @@ interface SidebarProps {
 }
 
 export const Sidebar: React.FC<SidebarProps> = ({
-  activeTab,
-  onSelectTab,
-  company,
-  mobileOpen,
-  onCloseMobile,
+  activeTab, onSelectTab, company, mobileOpen, onCloseMobile,
 }) => {
   const [companyExpanded, setCompanyExpanded] = useState(false);
   const [showHelpModal, setShowHelpModal] = useState(false);
@@ -48,6 +32,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
     { id: 'divider-2' },
     { id: 'team' as ActiveTab, label: 'Team', icon: Users },
     { id: 'agreements' as ActiveTab, label: 'Agreements', icon: FileCheck },
+    { id: 'agentic' as ActiveTab, label: 'Agentic Layer', icon: Bot },
     { id: 'divider-3' },
     { id: 'calendar' as ActiveTab, label: 'Calendar', icon: Calendar, badge: '1' },
     { id: 'divider-4' },
@@ -60,51 +45,53 @@ export const Sidebar: React.FC<SidebarProps> = ({
   };
 
   const content = (
-    <div className="flex flex-col h-full bg-white border-r border-slate-200 select-none">
-      {/* Top Brand Logo & Company Selector */}
-      <div className="p-4 border-b border-slate-100">
-        <div className="flex items-center space-x-3 mb-3">
-          <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center shrink-0 shadow-xs">
-            <div className="w-4 h-4 border-2 border-white rounded-sm"></div>
-          </div>
-          <span className="font-bold text-lg tracking-tight text-slate-900">Stratis UI</span>
-        </div>
-
+    <div
+      className="flex flex-col h-full select-none no-scrollbar overflow-y-auto"
+      style={{
+        background: 'var(--side-bg)',
+        backdropFilter: 'blur(28px)',
+        WebkitBackdropFilter: 'blur(28px)',
+        borderRight: '1px solid var(--side-border)',
+      }}
+    >
+      {/* Company selector (brand lockup lives in the top bar, not here) */}
+      <div className="p-4">
         <button
           onClick={() => setCompanyExpanded(!companyExpanded)}
-          className="w-full flex items-center justify-between p-2.5 rounded-xl hover:bg-slate-50 transition border border-slate-200 text-left bg-slate-50/50"
+          className="w-full flex items-center justify-between p-2.5 rounded-2xl glass-inset text-left transition hover:brightness-105"
         >
           <div className="flex items-center gap-2.5 min-w-0">
-            <div className="w-7 h-7 rounded-md bg-blue-100 text-blue-700 font-bold flex items-center justify-center text-xs shrink-0">
-              FE
-            </div>
+            <div className="w-7 h-7 rounded-lg pill flex items-center justify-center text-[11px] shrink-0">AD</div>
             <div className="min-w-0">
-              <div className="text-xs font-semibold text-slate-900 truncate">{company.name}</div>
-              <div className="text-[10px] text-slate-500 font-medium">Delaware C-Corp</div>
+              <div className="text-xs font-semibold text-hd truncate">{company.name}</div>
+              <div className="text-[10px] font-medium" style={{ color: 'var(--mut-2)' }}>{company.state} C-Corp</div>
             </div>
           </div>
-          <ChevronDown className={`w-3.5 h-3.5 text-slate-400 transition-transform duration-200 ${companyExpanded ? 'rotate-180' : ''}`} />
+          <ChevronDown
+            className={`w-3.5 h-3.5 transition-transform duration-200 ${companyExpanded ? 'rotate-180' : ''}`}
+            style={{ color: 'var(--mut-2)' }}
+          />
         </button>
 
         {companyExpanded && (
-          <div className="mt-2 p-2.5 bg-blue-50/50 rounded-xl border border-blue-100 text-xs text-slate-700 space-y-1 animate-in fade-in">
-            <div className="font-semibold text-slate-900 text-[11px] uppercase tracking-wider mb-1">Company Details</div>
-            <div>State: <span className="font-medium text-slate-900">{company.state} C-Corp</span></div>
-            <div>Delaware File: <span className="font-medium text-slate-900">{maskFileNum(company.delawareFileNumber, privacyMode)}</span></div>
-            <div>Auth Shares: <span className="font-medium text-slate-900">{company.totalAuthorizedShares.toLocaleString()}</span></div>
+          <div className="mt-2 p-2.5 rounded-xl glass-inset text-xs space-y-1 text-body animate-in fade-in">
+            <div className="font-semibold text-hd text-[11px] uppercase tracking-wider mb-1">Company Details</div>
+            <div>State: <span className="font-medium text-hd">{company.state} C-Corp</span></div>
+            <div>Delaware File: <span className="font-medium text-hd">{maskFileNum(company.delawareFileNumber, privacyMode)}</span></div>
+            <div>Auth Shares: <span className="font-medium text-hd">{company.totalAuthorizedShares.toLocaleString()}</span></div>
           </div>
         )}
       </div>
 
-      {/* Navigation List */}
-      <div className="flex-1 overflow-y-auto py-3 space-y-1">
-        <div className="px-5 py-1 text-[11px] font-semibold text-slate-400 uppercase tracking-wider mb-1">
+      {/* Navigation */}
+      <div className="flex-1 pb-3 space-y-0.5 px-3">
+        <div className="px-2 py-1 text-[11px] font-semibold uppercase tracking-wider mb-1" style={{ color: 'var(--mut)' }}>
           Workspace
         </div>
 
         {navItems.map((item, index) => {
           if (item.id.toString().startsWith('divider')) {
-            return <div key={`div-${index}`} className="my-2 border-t border-slate-100 mx-4" />;
+            return <div key={`div-${index}`} className="my-1.5 mx-2" style={{ borderTop: '1px solid var(--divider)' }} />;
           }
 
           const Icon = item.icon!;
@@ -114,18 +101,23 @@ export const Sidebar: React.FC<SidebarProps> = ({
             <button
               key={item.id}
               onClick={() => handleNavClick(item.id as ActiveTab)}
-              className={`w-full flex items-center justify-between px-5 py-2.5 text-xs font-semibold transition-all duration-150 ${
-                isActive
-                  ? 'bg-blue-50 text-blue-700 border-r-3 border-blue-600 font-semibold'
-                  : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50 font-medium'
-              }`}
+              className="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-[13px] transition-all duration-150"
+              style={{
+                fontWeight: isActive ? 600 : 500,
+                color: isActive ? 'var(--nav-active-txt)' : 'var(--txt)',
+                background: isActive ? 'var(--nav-active-bg)' : 'transparent',
+                border: `1px solid ${isActive ? 'var(--nav-active-border)' : 'transparent'}`,
+              }}
             >
               <div className="flex items-center gap-3">
-                <Icon className={`w-4 h-4 ${isActive ? 'text-blue-600' : 'text-slate-400'}`} />
+                <Icon className="w-4.5 h-4.5" style={{ color: 'var(--acc)' }} />
                 <span>{item.label}</span>
               </div>
               {item.badge && (
-                <span className="w-5 h-5 rounded-full bg-blue-600 text-white text-[10px] font-bold flex items-center justify-center shadow-xs">
+                <span
+                  className="w-5 h-5 rounded-full text-white text-[10px] font-bold flex items-center justify-center"
+                  style={{ background: 'var(--acc)' }}
+                >
                   {item.badge}
                 </span>
               )}
@@ -133,42 +125,29 @@ export const Sidebar: React.FC<SidebarProps> = ({
           );
         })}
 
-        {/* In-App Help & Support Center Button (No External SeedLegals Link) */}
-        <div className="pt-2 border-t border-slate-100 mt-2 px-2">
-          <button
-            onClick={() => setShowHelpModal(true)}
-            className="w-full flex items-center gap-3 px-3 py-2 rounded-xl text-xs text-slate-600 hover:text-slate-900 hover:bg-slate-50 font-medium transition text-left"
-          >
-            <HelpCircle className="w-4 h-4 text-blue-600" />
-            <span>Help & Support Center</span>
-          </button>
-        </div>
+        <div className="my-1.5 mx-2" style={{ borderTop: '1px solid var(--divider)' }} />
+        <button
+          onClick={() => setShowHelpModal(true)}
+          className="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-[13px] font-medium text-body transition text-left"
+        >
+          <HelpCircle className="w-4.5 h-4.5" style={{ color: 'var(--acc)' }} />
+          <span>Help &amp; Support Center</span>
+        </button>
       </div>
 
-      {/* Bottom Trial / Plan Widget */}
-      <div className="p-4 border-t border-slate-100 bg-white">
-        <div className="bg-slate-50 rounded-xl p-3.5 border border-slate-100">
-          <div className="flex items-center justify-between mb-1">
-            <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">TRIAL PLAN</span>
-            <span className="text-[10px] bg-emerald-100 text-emerald-800 font-semibold px-1.5 py-0.5 rounded">Active</span>
-          </div>
-          <p className="text-xs text-slate-900 font-bold mb-2">6 days remaining</p>
-          <button className="w-full py-1.5 bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold rounded-lg transition shadow-xs">
-            Upgrade Now
-          </button>
-        </div>
-
-        {/* User profile */}
-        <div className="flex items-center gap-2.5 mt-3 pt-3 border-t border-slate-100">
-          <div className="w-8 h-8 rounded-full bg-slate-200 text-slate-700 text-xs font-bold flex items-center justify-center shrink-0">
+      {/* User profile (trial/upgrade widget removed) */}
+      <div className="p-3">
+        <div className="flex items-center gap-2.5 p-3 rounded-2xl glass-card">
+          <div
+            className="w-8 h-8 rounded-full text-white text-xs font-bold flex items-center justify-center shrink-0"
+            style={{ background: 'linear-gradient(135deg,#04DCA2,#5F61FB)' }}
+          >
             {privacyMode ? '••' : 'AM'}
           </div>
           <div className="min-w-0 flex-1">
-            <div className="text-xs font-semibold text-slate-900 truncate">
-              {maskName('Alex Morgan', privacyMode)}
-            </div>
-            <div className="text-[10px] text-slate-400 truncate">
-              {maskEmail('alex.morgan@apexdynamics.io', privacyMode)}
+            <div className="text-xs font-semibold text-hd truncate">{maskName('Alex Morgan', privacyMode)}</div>
+            <div className="text-[10px] truncate" style={{ color: 'var(--mut-2)' }}>
+              {maskEmail('alex.morgan@apexdynamics.example', privacyMode)}
             </div>
           </div>
         </div>
@@ -178,81 +157,67 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
   return (
     <>
-      {/* Help Modal */}
       {showHelpModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-xs">
-          <div className="bg-white rounded-2xl shadow-2xl max-w-lg w-full p-6 relative border border-slate-200 animate-in fade-in zoom-in-95">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4" style={{ background: 'rgba(7,8,43,.5)', backdropFilter: 'blur(4px)' }}>
+          <div className="glass-card-active max-w-lg w-full p-6 relative animate-in fade-in zoom-in-95">
             <button
               onClick={() => setShowHelpModal(false)}
-              className="absolute top-4 right-4 p-1.5 text-slate-400 hover:text-slate-600 rounded-lg hover:bg-slate-100"
+              className="absolute top-4 right-4 p-1.5 rounded-lg"
+              style={{ color: 'var(--mut-2)' }}
             >
               <X className="w-5 h-5" />
             </button>
 
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center font-bold">
+              <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: 'var(--nav-active-bg)', color: 'var(--acc)' }}>
                 <HelpCircle className="w-6 h-6" />
               </div>
               <div>
-                <h3 className="text-lg font-bold text-slate-900">Delaware Corporate Help & Guidance</h3>
-                <p className="text-xs text-slate-500">Official Delaware C-Corp Incorporation & Compliance Knowledgebase</p>
+                <h3 className="text-lg font-bold text-hd">Delaware Corporate Help &amp; Guidance</h3>
+                <p className="text-xs text-mut">Official Delaware C-Corp Incorporation &amp; Compliance Knowledgebase</p>
               </div>
             </div>
 
-            <div className="space-y-3.5 text-xs text-slate-600 mb-6 max-h-80 overflow-y-auto">
-              <div className="p-3 bg-slate-50 rounded-xl border border-slate-100">
-                <div className="font-bold text-slate-900 mb-1 flex items-center gap-2">
-                  <BookOpen className="w-4 h-4 text-blue-600" />
+            <div className="space-y-3.5 text-xs text-body mb-6 max-h-80 overflow-y-auto">
+              <div className="p-3 rounded-xl glass-inset">
+                <div className="font-bold text-hd mb-1 flex items-center gap-2">
+                  <BookOpen className="w-4 h-4" style={{ color: 'var(--acc)' }} />
                   What is the 30-Day IRS 83(b) Rule?
                 </div>
                 <p>Founders receiving restricted shares must file their 83(b) Election with the IRS within exactly 30 calendar days of share issuance. This locks tax valuation at grant rather than vesting date.</p>
               </div>
 
-              <div className="p-3 bg-slate-50 rounded-xl border border-slate-100">
-                <div className="font-bold text-slate-900 mb-1 flex items-center gap-2">
-                  <Building2 className="w-4 h-4 text-emerald-600" />
+              <div className="p-3 rounded-xl glass-inset">
+                <div className="font-bold text-hd mb-1 flex items-center gap-2">
+                  <Building2 className="w-4 h-4" style={{ color: 'var(--ok)' }} />
                   How is EIN Issued?
                 </div>
                 <p>For founders with SSN/ITIN, EIN is generated online directly with the IRS. For international founders without SSN, filing is completed via Form SS-4 submitted through your Delaware Registered Agent.</p>
               </div>
 
-              <div className="p-3 bg-slate-50 rounded-xl border border-slate-100">
-                <div className="font-bold text-slate-900 mb-1 flex items-center gap-2">
-                  <Mail className="w-4 h-4 text-purple-600" />
+              <div className="p-3 rounded-xl glass-inset">
+                <div className="font-bold text-hd mb-1 flex items-center gap-2">
+                  <Mail className="w-4 h-4" style={{ color: 'var(--acc)' }} />
                   Need Official Legal Assistance?
                 </div>
-                <p>For custom bylaws, board consents, or investor pitch inquiries, contact your dedicated Delaware Registered Agent support team at <strong className="text-slate-800">support@incorp-delaware.com</strong>.</p>
+                <p>For custom bylaws, board consents, or investor pitch inquiries, contact your dedicated Delaware Registered Agent support team.</p>
               </div>
             </div>
 
-            <button
-              onClick={() => setShowHelpModal(false)}
-              className="w-full py-2.5 bg-slate-900 text-white font-bold rounded-xl text-xs hover:bg-slate-800 transition"
-            >
+            <button onClick={() => setShowHelpModal(false)} className="w-full py-2.5 btn-primary text-xs">
               Got it
             </button>
           </div>
         </div>
       )}
 
-      {/* Desktop Sidebar */}
-      <aside className="hidden md:block w-72 h-screen sticky top-0 shrink-0 z-20">
-        {content}
-      </aside>
+      <aside className="hidden md:block w-72 h-screen sticky top-0 shrink-0 z-20">{content}</aside>
 
-      {/* Mobile Drawer Overlay */}
       {mobileOpen && (
         <div className="md:hidden fixed inset-0 z-50 flex">
-          <div
-            className="fixed inset-0 bg-black/50 backdrop-blur-xs transition-opacity"
-            onClick={onCloseMobile}
-          />
-          <div className="relative w-80 max-w-[85vw] bg-white h-full z-10 shadow-2xl flex flex-col">
-            <button
-              onClick={onCloseMobile}
-              className="absolute top-3 right-3 p-1.5 rounded-lg text-gray-400 hover:text-gray-700 bg-gray-100"
-              aria-label="Close menu"
-            >
+          <div className="fixed inset-0" style={{ background: 'rgba(7,8,43,.5)', backdropFilter: 'blur(4px)' }} onClick={onCloseMobile} />
+          <div className="relative w-80 max-w-[85vw] h-full z-10 shadow-2xl flex flex-col">
+            <button onClick={onCloseMobile} className="absolute top-3 right-3 p-1.5 rounded-lg z-10" style={{ color: 'var(--mut-2)' }} aria-label="Close menu">
               <X className="w-5 h-5" />
             </button>
             {content}

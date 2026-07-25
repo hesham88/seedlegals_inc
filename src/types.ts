@@ -1,12 +1,13 @@
-export type ActiveTab = 
-  | 'incorporation' 
-  | 'documents' 
-  | 'pitch' 
-  | 'raise' 
-  | 'captable' 
-  | 'team' 
-  | 'agreements' 
-  | 'calendar' 
+export type ActiveTab =
+  | 'incorporation'
+  | 'documents'
+  | 'pitch'
+  | 'raise'
+  | 'captable'
+  | 'team'
+  | 'agreements'
+  | 'agentic'
+  | 'calendar'
   | 'settings';
 
 export interface CompanyOverview {

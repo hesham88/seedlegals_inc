@@ -3,7 +3,7 @@ import { Presentation, Link, Copy, Check, Upload } from 'lucide-react';
 
 export const PitchView: React.FC = () => {
   const [copied, setCopied] = useState(false);
-  const dataRoomUrl = 'https://dataroom.apexdynamics.io/pitch/apex-dataroom';
+  const dataRoomUrl = 'https://dataroom.apexdynamics.example/pitch/apex-dataroom';
 
   const handleCopy = () => {
     navigator.clipboard?.writeText?.(dataRoomUrl);

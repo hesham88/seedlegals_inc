@@ -3,17 +3,10 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { auth, signOutUser, type User } from './firebase';
 import { Landing } from './components/Landing';
 import {
-  ActiveTab,
-  CompanyOverview, 
-  Stockholder, 
-  LegalDocument, 
-  NotificationItem 
+  ActiveTab, CompanyOverview, Stockholder, LegalDocument, NotificationItem,
 } from './types';
-import { 
-  initialCompany, 
-  initialStockholders, 
-  initialDocuments, 
-  initialNotifications 
+import {
+  initialCompany, initialStockholders, initialDocuments, initialNotifications,
 } from './data/initialData';
 
 import { Header } from './components/Header';
@@ -23,6 +16,8 @@ import { DocumentModal } from './components/DocumentModal';
 import { ShareCertificateModal } from './components/ShareCertificateModal';
 import { AddStockholderModal } from './components/AddStockholderModal';
 import { EditOverviewModal } from './components/EditOverviewModal';
+import { GlassBackdrop } from './components/GlassBackdrop';
+import { ChatAgent } from './components/ChatAgent';
 
 import { IncorporationView } from './views/IncorporationView';
 import { MyDocumentsView } from './views/MyDocumentsView';
@@ -33,53 +28,34 @@ import { CalendarView } from './views/CalendarView';
 import { SettingsView } from './views/SettingsView';
 import { RaiseView } from './views/RaiseView';
 import { PitchView } from './views/PitchView';
+import { AgenticLayerView } from './views/AgenticLayerView';
 
 import { PrivacyProvider } from './context/PrivacyContext';
+import { ThemeProvider } from './context/ThemeContext';
 
 export default function App() {
   const [user, setUser] = useState<User | null>(null);
   const [authReady, setAuthReady] = useState(false);
   const [viewMode, setViewMode] = useState<'app' | 'landing'>('app');
 
-  useEffect(() => {
-    // onAuthStateChanged returns its unsubscribe fn — used as cleanup.
-    return onAuthStateChanged(auth, (u) => {
-      setUser(u);
-      setAuthReady(true);
-    });
-  }, []);
+  useEffect(() => onAuthStateChanged(auth, (u) => { setUser(u); setAuthReady(true); }), []);
 
   if (!authReady) {
-    return (
-      <div className="min-h-screen grid place-items-center bg-slate-50 text-slate-400 font-sans">
-        Loading…
-      </div>
-    );
+    return <div className="min-h-screen grid place-items-center text-mut font-sans">Loading…</div>;
   }
 
-  // Logged out → the pitch deck landing with a Google sign-in button.
-  if (!user) {
-    return <Landing user={null} />;
-  }
+  if (!user) return <Landing user={null} />;
 
-  // Signed in but currently viewing the marketing landing deck
   if (viewMode === 'landing') {
-    return (
-      <Landing
-        user={user}
-        onEnterApp={() => setViewMode('app')}
-      />
-    );
+    return <Landing user={user} onEnterApp={() => setViewMode('app')} />;
   }
 
-  // Signed in → the current app.
   return (
-    <PrivacyProvider>
-      <MainAppContent
-        user={user}
-        onGoToLanding={() => setViewMode('landing')}
-      />
-    </PrivacyProvider>
+    <ThemeProvider>
+      <PrivacyProvider>
+        <MainAppContent user={user} onGoToLanding={() => setViewMode('landing')} />
+      </PrivacyProvider>
+    </ThemeProvider>
   );
 }
 
@@ -95,7 +71,6 @@ function MainAppContent({ user, onGoToLanding }: MainAppContentProps) {
   const [documents, setDocuments] = useState<LegalDocument[]>(initialDocuments);
   const [notifications] = useState<NotificationItem[]>(initialNotifications);
 
-  // Modal States
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [selectedDocument, setSelectedDocument] = useState<LegalDocument | null>(null);
   const [isAddStockholderOpen, setIsAddStockholderOpen] = useState(false);
@@ -103,49 +78,22 @@ function MainAppContent({ user, onGoToLanding }: MainAppContentProps) {
   const [isShareCertificatesOpen, setIsShareCertificatesOpen] = useState(false);
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
 
-  const handleUpdateCompany = (updated: Partial<CompanyOverview>) => {
-    setCompany(prev => ({ ...prev, ...updated }));
-  };
-
-  const handleAddStockholder = (newStockholder: Stockholder) => {
-    setStockholders(prev => [...prev, newStockholder]);
-  };
-
+  const handleUpdateCompany = (updated: Partial<CompanyOverview>) => setCompany(prev => ({ ...prev, ...updated }));
+  const handleAddStockholder = (s: Stockholder) => setStockholders(prev => [...prev, s]);
   const handleSignDocument = (docId: string) => {
-    setDocuments(prev =>
-      prev.map(d =>
-        d.id === docId
-          ? { ...d, isSigned: true, signatureStatus: '1/1', signedDate: new Date().toISOString().split('T')[0] }
-          : d
-      )
-    );
+    setDocuments(prev => prev.map(d =>
+      d.id === docId
+        ? { ...d, isSigned: true, signatureStatus: '1/1', signedDate: new Date().toISOString().split('T')[0] }
+        : d));
   };
 
-  const availableShares = company.totalAuthorizedShares - company.reservedEquityPool - stockholders.reduce((sum, s) => sum + s.shareCount, 0);
+  const availableShares =
+    company.totalAuthorizedShares - company.reservedEquityPool - stockholders.reduce((sum, s) => sum + s.shareCount, 0);
 
   const renderActiveView = () => {
     switch (activeTab) {
-      case 'incorporation':
-        return (
-          <IncorporationView
-            company={company}
-            stockholders={stockholders}
-            documents={documents}
-            onOpenEditOverview={() => setIsEditOverviewOpen(true)}
-            onOpenAddStockholder={() => setIsAddStockholderOpen(true)}
-            onSelectDocument={(doc) => setSelectedDocument(doc)}
-            onOpenShareCertificates={() => setIsShareCertificatesOpen(true)}
-            onUpdateIncorporationDate={(date) => handleUpdateCompany({ incorporationDate: date })}
-            onUpdateCompany={handleUpdateCompany}
-          />
-        );
       case 'documents':
-        return (
-          <MyDocumentsView
-            documents={documents}
-            onSelectDocument={(doc) => setSelectedDocument(doc)}
-          />
-        );
+        return <MyDocumentsView documents={documents} onSelectDocument={setSelectedDocument} />;
       case 'captable':
         return (
           <CapTableView
@@ -156,32 +104,20 @@ function MainAppContent({ user, onGoToLanding }: MainAppContentProps) {
           />
         );
       case 'agreements':
-        return (
-          <AgreementsView
-            documents={documents}
-            onSelectDocument={(doc) => setSelectedDocument(doc)}
-          />
-        );
+        return <AgreementsView documents={documents} onSelectDocument={setSelectedDocument} />;
       case 'team':
-        return (
-          <TeamView
-            stockholders={stockholders}
-            onOpenAddStockholder={() => setIsAddStockholderOpen(true)}
-          />
-        );
+        return <TeamView stockholders={stockholders} onOpenAddStockholder={() => setIsAddStockholderOpen(true)} />;
+      case 'agentic':
+        return <AgenticLayerView />;
       case 'calendar':
         return <CalendarView />;
       case 'settings':
-        return (
-          <SettingsView
-            company={company}
-            onUpdateCompany={handleUpdateCompany}
-          />
-        );
+        return <SettingsView company={company} onUpdateCompany={handleUpdateCompany} />;
       case 'raise':
         return <RaiseView />;
       case 'pitch':
         return <PitchView />;
+      case 'incorporation':
       default:
         return (
           <IncorporationView
@@ -190,17 +126,19 @@ function MainAppContent({ user, onGoToLanding }: MainAppContentProps) {
             documents={documents}
             onOpenEditOverview={() => setIsEditOverviewOpen(true)}
             onOpenAddStockholder={() => setIsAddStockholderOpen(true)}
-            onSelectDocument={(doc) => setSelectedDocument(doc)}
+            onSelectDocument={setSelectedDocument}
             onOpenShareCertificates={() => setIsShareCertificatesOpen(true)}
             onUpdateIncorporationDate={(date) => handleUpdateCompany({ incorporationDate: date })}
+            onUpdateCompany={handleUpdateCompany}
           />
         );
     }
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col font-sans">
-      {/* Top Header */}
+    <div className="min-h-screen flex flex-col font-sans">
+      <GlassBackdrop />
+
       <Header
         activeTab={activeTab}
         notifications={notifications}
@@ -212,9 +150,7 @@ function MainAppContent({ user, onGoToLanding }: MainAppContentProps) {
         user={user}
       />
 
-      {/* Main Workspace Layout */}
       <div className="flex flex-1 min-h-[calc(100vh-72px)]">
-        {/* Left Navigation Sidebar */}
         <Sidebar
           activeTab={activeTab}
           onSelectTab={setActiveTab}
@@ -223,48 +159,26 @@ function MainAppContent({ user, onGoToLanding }: MainAppContentProps) {
           onCloseMobile={() => setMobileSidebarOpen(false)}
         />
 
-        {/* Primary Page Content Area */}
         <main className="flex-1 p-4 md:p-8 overflow-y-auto max-w-7xl mx-auto w-full">
           {renderActiveView()}
         </main>
       </div>
 
-      {/* Global Modals */}
+      {/* Floating Support & Inquiry agent — available on every screen */}
+      <ChatAgent />
+
       <SearchModal
         isOpen={isSearchOpen}
         onClose={() => setIsSearchOpen(false)}
         documents={documents}
         stockholders={stockholders}
-        onSelectDocument={(doc) => setSelectedDocument(doc)}
-        onSelectTab={(tab) => setActiveTab(tab)}
+        onSelectDocument={setSelectedDocument}
+        onSelectTab={setActiveTab}
       />
-
-      <DocumentModal
-        document={selectedDocument}
-        onClose={() => setSelectedDocument(null)}
-        onSignDocument={handleSignDocument}
-      />
-
-      <ShareCertificateModal
-        isOpen={isShareCertificatesOpen}
-        onClose={() => setIsShareCertificatesOpen(false)}
-        stockholder={stockholders[0]}
-        company={company}
-      />
-
-      <AddStockholderModal
-        isOpen={isAddStockholderOpen}
-        onClose={() => setIsAddStockholderOpen(false)}
-        onAddStockholder={handleAddStockholder}
-        availableShares={availableShares}
-      />
-
-      <EditOverviewModal
-        isOpen={isEditOverviewOpen}
-        onClose={() => setIsEditOverviewOpen(false)}
-        company={company}
-        onSave={handleUpdateCompany}
-      />
+      <DocumentModal document={selectedDocument} onClose={() => setSelectedDocument(null)} onSignDocument={handleSignDocument} />
+      <ShareCertificateModal isOpen={isShareCertificatesOpen} onClose={() => setIsShareCertificatesOpen(false)} stockholder={stockholders[0]} company={company} />
+      <AddStockholderModal isOpen={isAddStockholderOpen} onClose={() => setIsAddStockholderOpen(false)} onAddStockholder={handleAddStockholder} availableShares={availableShares} />
+      <EditOverviewModal isOpen={isEditOverviewOpen} onClose={() => setIsEditOverviewOpen(false)} company={company} onSave={handleUpdateCompany} />
     </div>
   );
 }
