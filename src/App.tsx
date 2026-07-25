@@ -1,6 +1,9 @@
-import React, { useState } from 'react';
-import { 
-  ActiveTab, 
+import React, { useState, useEffect } from 'react';
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth, type User } from './firebase';
+import { Landing } from './components/Landing';
+import {
+  ActiveTab,
   CompanyOverview, 
   Stockholder, 
   LegalDocument, 
@@ -34,6 +37,31 @@ import { PitchView } from './views/PitchView';
 import { PrivacyProvider } from './context/PrivacyContext';
 
 export default function App() {
+  const [user, setUser] = useState<User | null>(null);
+  const [authReady, setAuthReady] = useState(false);
+
+  useEffect(() => {
+    // onAuthStateChanged returns its unsubscribe fn — used as cleanup.
+    return onAuthStateChanged(auth, (u) => {
+      setUser(u);
+      setAuthReady(true);
+    });
+  }, []);
+
+  if (!authReady) {
+    return (
+      <div className="min-h-screen grid place-items-center bg-slate-50 text-slate-400 font-sans">
+        Loading…
+      </div>
+    );
+  }
+
+  // Logged out → the pitch deck landing with a Google sign-in button.
+  if (!user) {
+    return <Landing />;
+  }
+
+  // Signed in → the current app.
   return (
     <PrivacyProvider>
       <MainAppContent />
