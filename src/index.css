@@ -1,9 +1,70 @@
 @import "tailwindcss";
 
+/*
+ * Design system adopted from the new Claude mock:
+ *   - Type:   Manrope (display + body)
+ *   - Brand:  indigo  #5F61FB   (remaps the app's blue/indigo scale)
+ *   - Accent: teal    #04DCA2   (remaps emerald/green — success / "done")
+ *   - Ground: warm off-white #faf9f5 (remaps slate-50)
+ * Remapping the token scales re-skins every existing utility class app-wide
+ * without touching each component.
+ */
+@theme {
+  --font-sans: 'Manrope', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+
+  /* Brand — indigo #5F61FB */
+  --color-blue-50:  #f4f0ff;
+  --color-blue-100: #eceafe;
+  --color-blue-200: #c9caff;
+  --color-blue-300: #a9abff;
+  --color-blue-400: #8b8dff;
+  --color-blue-500: #7173fb;
+  --color-blue-600: #5f61fb;
+  --color-blue-700: #4a4ce0;
+  --color-blue-800: #3a3cba;
+  --color-blue-900: #000646;
+
+  --color-indigo-50:  #f4f0ff;
+  --color-indigo-100: #eceafe;
+  --color-indigo-200: #c9caff;
+  --color-indigo-300: #a9abff;
+  --color-indigo-400: #8b8dff;
+  --color-indigo-500: #7173fb;
+  --color-indigo-600: #5f61fb;
+  --color-indigo-700: #4a4ce0;
+  --color-indigo-800: #3a3cba;
+  --color-indigo-900: #000646;
+
+  /* Accent — teal #04DCA2 (success / done) */
+  --color-emerald-50:  #e8f9f4;
+  --color-emerald-100: #c7f3e6;
+  --color-emerald-200: #90e8cf;
+  --color-emerald-300: #4fd9b5;
+  --color-emerald-400: #18ca9f;
+  --color-emerald-500: #04dca2;
+  --color-emerald-600: #04a97e;
+  --color-emerald-700: #067a5e;
+  --color-emerald-800: #04352a;
+  --color-emerald-900: #022019;
+
+  --color-green-50:  #e8f9f4;
+  --color-green-100: #c7f3e6;
+  --color-green-500: #04dca2;
+  --color-green-600: #04a97e;
+  --color-green-700: #067a5e;
+
+  --color-teal-50:  #e8f9f4;
+  --color-teal-500: #04dca2;
+  --color-teal-600: #04a97e;
+
+  /* Warm ground */
+  --color-slate-50: #faf9f5;
+}
+
 @layer base {
   body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    background-color: #f8fafc;
+    font-family: 'Manrope', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    background-color: #faf9f5;
     color: #0f172a;
   }
 }
@@ -16,9 +77,9 @@
 }
 
 .active-nav {
-  background-color: #eff6ff;
-  color: #1d4ed8;
-  border-right: 3px solid #1d4ed8;
+  background-color: #f4f0ff;
+  color: #4a4ce0;
+  border-right: 3px solid #5f61fb;
 }
 
 .glass {
