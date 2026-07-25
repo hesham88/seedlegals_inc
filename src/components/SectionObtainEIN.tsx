@@ -183,7 +183,7 @@ export const SectionObtainEIN: React.FC<SectionObtainEINProps> = ({
                     : 'text-slate-600 hover:bg-slate-100/70'
                 }`}
               >
-                <div className={`p-2 rounded-lg ${einOption === 'ssn_sync' ? 'bg-blue-50 text-blue-600' : 'bg-slate-200 text-body'}`}>
+                <div className={`p-2 rounded-lg ${einOption === 'ssn_sync' ? 'pill' : 'bg-slate-200 text-body'}`}>
                   <Zap className="w-5 h-5" />
                 </div>
                 <div>
@@ -205,7 +205,7 @@ export const SectionObtainEIN: React.FC<SectionObtainEINProps> = ({
                     : 'text-slate-600 hover:bg-slate-100/70'
                 }`}
               >
-                <div className={`p-2 rounded-lg ${einOption === 'no_ssn_incorp' ? 'bg-blue-50 text-blue-600' : 'bg-slate-200 text-body'}`}>
+                <div className={`p-2 rounded-lg ${einOption === 'no_ssn_incorp' ? 'pill' : 'bg-slate-200 text-body'}`}>
                   <Globe className="w-5 h-5" />
                 </div>
                 <div>

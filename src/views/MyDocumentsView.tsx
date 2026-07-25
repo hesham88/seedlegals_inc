@@ -90,7 +90,7 @@ export const MyDocumentsView: React.FC<MyDocumentsViewProps> = ({
                       onClick={() => onSelectDocument(doc)}
                       className="text-left hover:text-blue-600 flex items-center gap-2.5"
                     >
-                      <div className="p-1.5 rounded-lg bg-blue-50 text-blue-600">
+                      <div className="p-1.5 rounded-lg pill">
                         <FileText className="w-4 h-4" />
                       </div>
                       <div>
@@ -123,7 +123,7 @@ export const MyDocumentsView: React.FC<MyDocumentsViewProps> = ({
                   <td className="py-3.5 px-4 text-right">
                     <button
                       onClick={() => onSelectDocument(doc)}
-                      className="px-3 py-1.5 rounded-lg border border-blue-600 text-blue-600 hover:bg-blue-50 font-bold text-xs transition"
+                      className="px-3 py-1.5 rounded-lg btn-ghost hover:bg-blue-50 font-bold text-xs transition"
                     >
                       View & Sign
                     </button>

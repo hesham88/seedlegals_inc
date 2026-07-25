@@ -143,7 +143,7 @@ export const CapTableView: React.FC<CapTableViewProps> = ({
                       </div>
                     </td>
                     <td className="py-3.5 px-4">
-                      <span className="px-2.5 py-1 rounded-lg bg-blue-50 text-blue-600 font-bold text-[10px]">
+                      <span className="px-2.5 py-1 rounded-lg pill font-bold text-[10px]">
                         {sh.shareClass}
                       </span>
                     </td>

@@ -165,7 +165,7 @@ export const Section83bFiling: React.FC<Section83bFilingProps> = ({
                     : 'text-slate-600 hover:bg-slate-100/70'
                 }`}
               >
-                <div className={`p-2 rounded-lg ${filingPathway === 'ssn_online' ? 'bg-blue-50 text-blue-600' : 'bg-slate-200 text-body'}`}>
+                <div className={`p-2 rounded-lg ${filingPathway === 'ssn_online' ? 'pill' : 'bg-slate-200 text-body'}`}>
                   <Send className="w-5 h-5" />
                 </div>
                 <div>
@@ -187,7 +187,7 @@ export const Section83bFiling: React.FC<Section83bFilingProps> = ({
                     : 'text-slate-600 hover:bg-slate-100/70'
                 }`}
               >
-                <div className={`p-2 rounded-lg ${filingPathway === 'no_ssn_mail' ? 'bg-blue-50 text-blue-600' : 'bg-slate-200 text-body'}`}>
+                <div className={`p-2 rounded-lg ${filingPathway === 'no_ssn_mail' ? 'pill' : 'bg-slate-200 text-body'}`}>
                   <Mail className="w-5 h-5" />
                 </div>
                 <div>
@@ -404,7 +404,7 @@ export const Section83bFiling: React.FC<Section83bFilingProps> = ({
                       {doc83b && (
                         <button
                           onClick={() => onSelectDocument(doc83b)}
-                          className="px-3 py-1.5 rounded-xl border border-blue-600 text-blue-600 hover:bg-blue-50 font-semibold text-xs transition flex items-center gap-1.5"
+                          className="px-3 py-1.5 rounded-xl btn-ghost hover:bg-blue-50 font-semibold text-xs transition flex items-center gap-1.5"
                         >
                           <Printer className="w-3.5 h-3.5" />
                           <span>Print 83(b) Mail Package</span>

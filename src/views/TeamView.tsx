@@ -47,7 +47,7 @@ export const TeamView: React.FC<TeamViewProps> = ({
                 </div>
 
                 <div className="mt-3 flex flex-wrap gap-1.5 text-[11px]">
-                  <span className="px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-600 font-semibold border border-blue-100">
+                  <span className="px-2.5 py-0.5 rounded-full pill font-semibold border border-blue-100">
                     CEO, President & Secretary
                   </span>
                   <span className="px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-700 font-semibold border border-emerald-200">

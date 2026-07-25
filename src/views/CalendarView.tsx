@@ -51,7 +51,7 @@ export const CalendarView: React.FC = () => {
                   <CheckCircle2 className="w-5 h-5 text-emerald-600" />
                 </div>
               ) : (
-                <div className="p-2.5 rounded-xl bg-blue-50 text-blue-600 shrink-0 border border-blue-100">
+                <div className="p-2.5 rounded-xl pill shrink-0 border border-blue-100">
                   <Clock className="w-5 h-5" />
                 </div>
               )}

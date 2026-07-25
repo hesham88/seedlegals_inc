@@ -163,6 +163,19 @@
 
   --glow-acc: 0 8px 40px rgba(95, 97, 251, .25);
   --btn-glow: 0 4px 20px rgba(95, 97, 251, .6);
+
+  /* Dark-mode surface + tint flips. Backgrounds & borders only — text tokens
+     (blue-600, emerald-700) and button-bg tokens are left intact so button
+     contrast and pill text stay correct. Handles table heads (bg-slate-50),
+     borders (slate-200), dividers (slate-100), insets, and status tints. */
+  --color-slate-50:  rgba(140, 142, 255, .05);
+  --color-slate-100: rgba(140, 142, 255, .09);
+  --color-slate-200: rgba(140, 142, 255, .16);
+  --color-blue-50:   rgba(95, 97, 251, .16);
+  --color-blue-100:  rgba(95, 97, 251, .24);
+  --color-emerald-50:  rgba(4, 220, 162, .12);
+  --color-emerald-100: rgba(4, 220, 162, .16);
+  --color-emerald-200: rgba(4, 220, 162, .30);
 }
 
 @layer base {

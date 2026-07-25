@@ -38,7 +38,7 @@ export const AgreementsView: React.FC<AgreementsViewProps> = ({
           <div key={doc.id} className="p-5 glass-card flex flex-col justify-between hover:border-blue-600/40 transition">
             <div>
               <div className="flex items-center justify-between mb-2">
-                <span className="px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-600 text-[10px] font-bold">
+                <span className="px-2.5 py-0.5 rounded-full pill text-[10px] font-bold">
                   {doc.category}
                 </span>
                 <span className="text-xs text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-md font-semibold border border-emerald-100 flex items-center gap-1">

@@ -322,7 +322,7 @@ export const IncorporationView: React.FC<IncorporationViewProps> = ({
                 {/* Card 5: Expedite filing */}
                 <div className="p-5 glass-card">
                   <div className="flex items-center gap-3 mb-2">
-                    <div className="w-6 h-6 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
+                    <div className="w-6 h-6 rounded-full pill flex items-center justify-center shrink-0">
                       <Zap className="w-3.5 h-3.5" />
                     </div>
                     <h3 className="text-sm font-bold text-hd">
@@ -359,7 +359,7 @@ export const IncorporationView: React.FC<IncorporationViewProps> = ({
                         const doc = getDoc('doc-coi');
                         if (doc) onSelectDocument(doc);
                       }}
-                      className="px-3.5 py-1.5 rounded-xl border border-blue-600 text-blue-600 hover:bg-blue-50 text-xs font-semibold flex items-center gap-1.5 transition shrink-0"
+                      className="px-3.5 py-1.5 rounded-xl btn-ghost hover:bg-blue-50 text-xs font-semibold flex items-center gap-1.5 transition shrink-0"
                     >
                       <Download className="w-3.5 h-3.5" />
                       <span>Download</span>
@@ -530,7 +530,7 @@ export const IncorporationView: React.FC<IncorporationViewProps> = ({
                           const doc = getDoc('doc-spa');
                           if (doc) onSelectDocument(doc);
                         }}
-                        className="px-3 py-1 rounded-lg border border-blue-600 text-blue-600 hover:bg-blue-50 font-bold transition flex items-center gap-1"
+                        className="px-3 py-1 rounded-lg btn-ghost hover:bg-blue-50 font-bold transition flex items-center gap-1"
                       >
                         <span>Manage</span>
                         <ChevronRight className="w-4 h-4" />
@@ -561,7 +561,7 @@ export const IncorporationView: React.FC<IncorporationViewProps> = ({
                           <span>{item.name}</span>
                           <button
                             onClick={() => item.doc && onSelectDocument(item.doc)}
-                            className="px-3 py-1 rounded-lg border border-blue-600 text-blue-600 hover:bg-blue-50 font-bold transition flex items-center gap-1"
+                            className="px-3 py-1 rounded-lg btn-ghost hover:bg-blue-50 font-bold transition flex items-center gap-1"
                           >
                             <span>Manage</span>
                             <ChevronRight className="w-4 h-4" />
@@ -593,7 +593,7 @@ export const IncorporationView: React.FC<IncorporationViewProps> = ({
                         <span>{item.name}</span>
                         <button
                           onClick={() => item.doc && onSelectDocument(item.doc)}
-                          className="px-3 py-1 rounded-lg border border-blue-600 text-blue-600 hover:bg-blue-50 font-bold transition flex items-center gap-1"
+                          className="px-3 py-1 rounded-lg btn-ghost hover:bg-blue-50 font-bold transition flex items-center gap-1"
                         >
                           <span>Manage</span>
                           <ChevronRight className="w-4 h-4" />

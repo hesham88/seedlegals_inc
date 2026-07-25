@@ -95,7 +95,7 @@ export const RaiseView: React.FC = () => {
                 </tr>
                 <tr className="hover:bg-slate-50 transition">
                   <td className="py-3 px-4 font-semibold text-hd">{maskName('Summit Capital', privacyMode)}</td>
-                  <td className="py-3 px-4"><span className="px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-600 font-semibold border border-blue-100">Term Sheet Issued</span></td>
+                  <td className="py-3 px-4"><span className="px-2.5 py-0.5 rounded-full pill font-semibold border border-blue-100">Term Sheet Issued</span></td>
                   <td className="py-3 px-4 text-right font-bold text-hd">{maskMoney(150000, privacyMode)}</td>
                 </tr>
               </tbody>
