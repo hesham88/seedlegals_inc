@@ -14,3 +14,6 @@ docs/
 .remember/
 .claude/
 CLAUDE.md
+
+# One-time integration handoff — local only, never ships
+handoff/
