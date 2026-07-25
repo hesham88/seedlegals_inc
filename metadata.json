@@ -1,0 +1,6 @@
+{
+  "name": "Delaware C-Corp Incorporation & Equity Platform",
+  "description": "Comprehensive incorporation workflow, cap table management, document signing, 83(b) election, and legal workflow portal for startups.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
