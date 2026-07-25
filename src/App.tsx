@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { onAuthStateChanged } from 'firebase/auth';
-import { auth, type User } from './firebase';
+import { auth, signOutUser, type User } from './firebase';
 import { Landing } from './components/Landing';
 import {
   ActiveTab,
@@ -39,6 +39,7 @@ import { PrivacyProvider } from './context/PrivacyContext';
 export default function App() {
   const [user, setUser] = useState<User | null>(null);
   const [authReady, setAuthReady] = useState(false);
+  const [viewMode, setViewMode] = useState<'app' | 'landing'>('app');
 
   useEffect(() => {
     // onAuthStateChanged returns its unsubscribe fn — used as cleanup.
@@ -58,18 +59,36 @@ export default function App() {
 
   // Logged out → the pitch deck landing with a Google sign-in button.
   if (!user) {
-    return <Landing />;
+    return <Landing user={null} />;
+  }
+
+  // Signed in but currently viewing the marketing landing deck
+  if (viewMode === 'landing') {
+    return (
+      <Landing
+        user={user}
+        onEnterApp={() => setViewMode('app')}
+      />
+    );
   }
 
   // Signed in → the current app.
   return (
     <PrivacyProvider>
-      <MainAppContent />
+      <MainAppContent
+        user={user}
+        onGoToLanding={() => setViewMode('landing')}
+      />
     </PrivacyProvider>
   );
 }
 
-function MainAppContent() {
+interface MainAppContentProps {
+  user: User;
+  onGoToLanding: () => void;
+}
+
+function MainAppContent({ user, onGoToLanding }: MainAppContentProps) {
   const [activeTab, setActiveTab] = useState<ActiveTab>('incorporation');
   const [company, setCompany] = useState<CompanyOverview>(initialCompany);
   const [stockholders, setStockholders] = useState<Stockholder[]>(initialStockholders);
@@ -188,6 +207,9 @@ function MainAppContent() {
         onOpenSearch={() => setIsSearchOpen(true)}
         onToggleMobileSidebar={() => setMobileSidebarOpen(!mobileSidebarOpen)}
         onSelectTab={setActiveTab}
+        onGoToLanding={onGoToLanding}
+        onSignOut={signOutUser}
+        user={user}
       />
 
       {/* Main Workspace Layout */}

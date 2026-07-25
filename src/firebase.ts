@@ -7,15 +7,17 @@ import {
   type User,
 } from 'firebase/auth';
 
+import firebaseConfigJson from '../firebase-applet-config.json';
+
 // Firebase web config is not a secret (it ships in the client bundle); it is
 // protected by Firebase security rules + authorized domains, not by hiding it.
 // Values come from Vite build-time env (set VITE_FIREBASE_* in AI Studio /
-// Cloud Build), with a placeholder fallback so the app still builds locally.
+// Cloud Build), with firebase-applet-config.json as fallback for AI Studio runtime.
 const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY ?? 'REPLACE_WITH_API_KEY',
-  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN ?? 'REPLACE.firebaseapp.com',
-  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID ?? 'REPLACE_PROJECT_ID',
-  appId: import.meta.env.VITE_FIREBASE_APP_ID ?? 'REPLACE_APP_ID',
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY ?? firebaseConfigJson.apiKey ?? 'REPLACE_WITH_API_KEY',
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN ?? firebaseConfigJson.authDomain ?? 'REPLACE.firebaseapp.com',
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID ?? firebaseConfigJson.projectId ?? 'REPLACE_PROJECT_ID',
+  appId: import.meta.env.VITE_FIREBASE_APP_ID ?? firebaseConfigJson.appId ?? 'REPLACE_APP_ID',
 };
 
 const app = initializeApp(firebaseConfig);

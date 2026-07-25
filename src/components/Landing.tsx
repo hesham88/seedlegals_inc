@@ -1,5 +1,10 @@
 import { DECK_HTML } from '../landingDeck';
-import { signInWithGoogle } from '../firebase';
+import { signInWithGoogle, signOutUser, type User } from '../firebase';
+
+interface LandingProps {
+  user?: User | null;
+  onEnterApp?: () => void;
+}
 
 const GoogleGlyph = () => (
   <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true">
@@ -10,30 +15,75 @@ const GoogleGlyph = () => (
   </svg>
 );
 
-export function Landing() {
+export function Landing({ user, onEnterApp }: LandingProps) {
   return (
     <div style={{ position: 'relative' }}>
-      <div style={{ position: 'fixed', top: 16, right: 16, zIndex: 20 }}>
-        <button
-          type="button"
-          onClick={() => void signInWithGoogle()}
-          style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: 10,
-            font: '600 14px/1 "Segoe UI",system-ui,sans-serif',
-            color: '#0F1524',
-            background: '#ffffff',
-            border: '1px solid rgba(0,0,0,.08)',
-            borderRadius: 999,
-            padding: '11px 18px',
-            cursor: 'pointer',
-            boxShadow: '0 6px 24px rgba(0,0,0,.35)',
-          }}
-        >
-          <GoogleGlyph />
-          Continue with Google
-        </button>
+      <div style={{ position: 'fixed', top: 16, right: 16, zIndex: 20, display: 'flex', gap: 10 }}>
+        {user ? (
+          <>
+            {onEnterApp && (
+              <button
+                type="button"
+                onClick={onEnterApp}
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: 8,
+                  font: '600 14px/1 "Segoe UI",system-ui,sans-serif',
+                  color: '#ffffff',
+                  background: '#2563EB',
+                  border: 'none',
+                  borderRadius: 999,
+                  padding: '11px 20px',
+                  cursor: 'pointer',
+                  boxShadow: '0 6px 24px rgba(37,99,235,.4)',
+                }}
+              >
+                Return to App &rarr;
+              </button>
+            )}
+            <button
+              type="button"
+              onClick={() => void signOutUser()}
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: 8,
+                font: '600 14px/1 "Segoe UI",system-ui,sans-serif',
+                color: '#1E293B',
+                background: '#ffffff',
+                border: '1px solid rgba(0,0,0,.12)',
+                borderRadius: 999,
+                padding: '11px 18px',
+                cursor: 'pointer',
+                boxShadow: '0 6px 24px rgba(0,0,0,.2)',
+              }}
+            >
+              Sign Out
+            </button>
+          </>
+        ) : (
+          <button
+            type="button"
+            onClick={() => void signInWithGoogle()}
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: 10,
+              font: '600 14px/1 "Segoe UI",system-ui,sans-serif',
+              color: '#0F1524',
+              background: '#ffffff',
+              border: '1px solid rgba(0,0,0,.08)',
+              borderRadius: 999,
+              padding: '11px 18px',
+              cursor: 'pointer',
+              boxShadow: '0 6px 24px rgba(0,0,0,.35)',
+            }}
+          >
+            <GoogleGlyph />
+            Continue with Google
+          </button>
+        )}
       </div>
       {/* DECK_HTML is a static, compile-time constant authored in this repo —
           not user input, so there is no XSS surface here. */}

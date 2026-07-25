@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Search, Bell, ChevronDown, Menu, CheckCircle2, ShieldCheck, Building2, Eye, EyeOff } from 'lucide-react';
+import { Search, Bell, ChevronDown, Menu, CheckCircle2, ShieldCheck, Building2, EyeOff, LayoutTemplate, LogOut } from 'lucide-react';
+import { User } from 'firebase/auth';
 import { ActiveTab, NotificationItem } from '../types';
 import { usePrivacy } from '../context/PrivacyContext';
 
@@ -9,6 +10,9 @@ interface HeaderProps {
   onOpenSearch: () => void;
   onToggleMobileSidebar: () => void;
   onSelectTab: (tab: ActiveTab) => void;
+  onGoToLanding?: () => void;
+  onSignOut?: () => void;
+  user?: User | null;
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -16,6 +20,8 @@ export const Header: React.FC<HeaderProps> = ({
   notifications,
   onOpenSearch,
   onToggleMobileSidebar,
+  onGoToLanding,
+  onSignOut,
 }) => {
   const [showNotifications, setShowNotifications] = useState(false);
   const [showAppSwitcher, setShowAppSwitcher] = useState(false);
@@ -62,6 +68,18 @@ export const Header: React.FC<HeaderProps> = ({
         >
           <Menu className="w-5 h-5" />
         </button>
+
+        {/* Marketing Landing Page Return Button */}
+        {onGoToLanding && (
+          <button
+            onClick={onGoToLanding}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold shadow-xs transition shrink-0 cursor-pointer"
+            title="Return to Proposal Marketing Landing Page"
+          >
+            <LayoutTemplate className="w-3.5 h-3.5 text-indigo-300" />
+            <span className="hidden sm:inline">Landing Page</span>
+          </button>
+        )}
 
         <div className="flex items-center gap-3 min-w-0">
           <div className="flex flex-col min-w-0">
@@ -209,6 +227,18 @@ export const Header: React.FC<HeaderProps> = ({
             </div>
           )}
         </div>
+
+        {/* Sign Out Button */}
+        {onSignOut && (
+          <button
+            onClick={onSignOut}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-slate-200 bg-white hover:bg-rose-50 hover:border-rose-200 hover:text-rose-600 text-slate-700 text-xs font-semibold transition shadow-xs cursor-pointer group"
+            title="Sign Out of Account"
+          >
+            <LogOut className="w-3.5 h-3.5 text-slate-400 group-hover:text-rose-600 transition-colors" />
+            <span className="hidden md:inline">Sign Out</span>
+          </button>
+        )}
       </div>
     </header>
   );

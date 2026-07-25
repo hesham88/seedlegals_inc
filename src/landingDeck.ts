@@ -82,7 +82,7 @@ export const DECK_HTML = `
     <h1>Incorporation,<br>Reimagined.</h1>
     <p class="lead">An <span class="accent">agentic layer</span> that turns everything after &ldquo;incorporation complete&rdquo; &mdash; EIN, 83(b), banking, the raise &mdash; from a black box into a transparent, guided, investment-ready journey. On the stack you already run.</p>
     <div class="pills"><span class="pill">Angular &middot; RxJS/NgRx</span><span class="pill">Spring Boot &middot; GraphQL/REST</span><span class="pill">AWS &middot; Docker</span><span class="pill on">No rip-and-replace</span></div>
-    <p class="byline">A proposal by <b>Hesham Aboul-Fetouh</b> &middot; Founder &amp; CEO, Fahem Enterprise</p>
+    <p class="byline">A proposal by <b>Hesham Aboul-Fetouh</b> &middot; Founder &amp; CEO, Asdaa.co</p>
   </div></section>
   <section><div class="wrap">
     <p class="eyebrow"><span class="n">01</span> &middot; The core problem</p>
@@ -133,6 +133,6 @@ export const DECK_HTML = `
       <div class="card"><div class="tag">For SeedLegals</div><ul class="clean"><li>Scalable ops &mdash; agents absorb the chase</li><li>Fewer escalations, higher retention</li><li><strong>New revenue</strong> &mdash; managed EIN &amp; banking concierge</li><li>Full operational transparency</li></ul></div>
     </div>
   </div></section>
-  <div class="wrap foot">Prepared by Hesham Aboul-Fetouh &middot; Fahem Enterprise &middot; A proposal for SeedLegals &mdash; not an official SeedLegals document. Sign in to enter the live prototype &rarr;</div>
+  <div class="wrap foot">Prepared by Hesham Aboul-Fetouh &middot; Asdaa.co &middot; A proposal for SeedLegals &mdash; not an official SeedLegals document. Sign in to enter the live prototype &rarr;</div>
 </div>
 `;
